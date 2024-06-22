@@ -26,6 +26,20 @@ int* readFile(char* file_name, int& n) {
     return array;
 }
 
+void writeFile(char* file_name, int* array, int n) {
+    FILE* f = fopen(file_name, "a");
+    if (!f) {
+        cout << "Cannot open file\n";
+        return;
+    }
+    fprintf(f, "%d\n", n);
+    for (int i = 0; i < n; i++) {
+        fprintf(f, "%d ", array[i]);
+    }
+    fprintf(f, "\n");
+    fclose(f);
+}
+
 int count_comparisons(int* array, int n, string algro) {
     int count_compare;
     if (algro == "selection-sort") selectionSort_count(array, n, count_compare);

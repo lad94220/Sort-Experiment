@@ -12,5 +12,6 @@ void GenerateData(int a[], int n, int dataType);
 
 int isNum(char* str);
 int* readFile(char* file_name, int& n);
+void writeFile(char* file_name, int* array, int n);
 int count_comparisons(int* array, int n, string algro);
 long long runtime(int* array, int n, string algro);
