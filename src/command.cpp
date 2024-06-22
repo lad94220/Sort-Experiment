@@ -15,7 +15,7 @@ int* readFile(char* file_name, int& n) {
     FILE* f = fopen(file_name, "r");
     if (!f) {
         cout << "Cannot open file\n";
-        return;
+        return NULL;
     }
     fscanf(f, "%d\n", &n);
     int* array = new int[n];
