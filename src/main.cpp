@@ -47,6 +47,7 @@ int main(int argc, char** argv) {
                 output_para = argv[4];
                 int* array = new int[n];
                 int* array1 = new int[n];
+
                 //console output
                 cout << "ALGORITHM MODE\n";
                 cout << "Algorithm: " << argv[2] << endl;
@@ -57,8 +58,10 @@ int main(int argc, char** argv) {
                 cout << "-------------------------\n";
                 GenerateData(array, n, 0);
                 for (int i = 0; i < n; i++) array1[i] = array[i];
+
                 //write randomized data
                 writeFile("input_1.txt", array, n);
+
                 if (output_para == "-both") {
                     cout << "Running time (if required): " << runtime(array, n, argv[2]) << endl;
                     cout << "Comparisions (if required): " << count_comparisons(array1, n, argv[2]) << endl;    
@@ -77,8 +80,10 @@ int main(int argc, char** argv) {
                 cout << "-------------------------\n";
                 GenerateData(array, n, 3);
                 for (int i = 0; i < n; i++) array1[i] = array[i];
+
                 //write nearly sorted data
                 writeFile("input_2.txt", array, n);
+
                 if (output_para == "-both") {
                     cout << "Running time (if required): " << runtime(array, n, argv[2]) << endl;
                     cout << "Comparisions (if required): " << count_comparisons(array1, n, argv[2]) << endl;    
@@ -97,8 +102,10 @@ int main(int argc, char** argv) {
                 cout << "-------------------------\n";
                 GenerateData(array, n, 1);
                 for (int i = 0; i < n; i++) array1[i] = array[i];
+
                 //write sortd data
                 writeFile("input_3.txt", array, n);
+
                 if (output_para == "-both") {
                     cout << "Running time (if required): " << runtime(array, n, argv[2]) << endl;
                     cout << "Comparisions (if required): " << count_comparisons(array1, n, argv[2]) << endl;    
@@ -117,8 +124,10 @@ int main(int argc, char** argv) {
                 cout << "-------------------------\n";
                 GenerateData(array, n, 2);
                 for (int i = 0; i < n; i++) array1[i] = array[i];
+
                 //write reversed data
                 writeFile("input_4.txt", array, n);
+                
                 if (output_para == "-both") {
                     cout << "Running time (if required): " << runtime(array, n, argv[2]) << endl;
                     cout << "Comparisions (if required): " << count_comparisons(array1, n, argv[2]) << endl;    
