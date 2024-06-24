@@ -2,7 +2,8 @@
 #include<algorithm>
 using namespace std;
 
-//runtime
+//RUNTIME
+
 void selectionSort(int* src, int n);
 void insertionSort(int* src, int n);
 void bubbleSort(int* src, int n);
