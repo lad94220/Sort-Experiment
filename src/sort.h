@@ -4,8 +4,13 @@ using namespace std;
 
 /*runtime*/
 
+//selection sort
 void selectionSort(int* src, int n);
+
+//insertion sort
 void insertionSort(int* src, int n);
+
+
 void bubbleSort(int* src, int n);
 
 //heap sort
@@ -13,7 +18,10 @@ void minHeapRebuild(int* src, int n, int pos);
 void minHeapBuild(int* src, int n);
 void heapSort(int* src, int n);
 
+//merge sort
 void mergeSort(int* src, int n);
+
+//quick sort
 void quickSort(int* src, int n);
 
 //radix sort
@@ -21,7 +29,12 @@ void digitSort(int* src, int n, int exp);
 void radixSort(int* src, int n);
 
 void shakerSort(int* src, int n);
+
+//shell sort
 void shellSort(int* src, int n);
+
+
+
 void countingSort(int* src, int n);
 void flashSort(int* src, int n);
 
