@@ -1,5 +1,6 @@
 #include "sort.h"
 
+//selection sort implementation
 void selectionSort(int* src, int n) {
     for (int i = 0; i < n; i++) {
         for (int j = i + 1; j < n; j++) {
@@ -7,6 +8,20 @@ void selectionSort(int* src, int n) {
         }
     }
 }
+
+//insertion sort implementation
+void insertionSort(int* src, int n) {
+	for (int i = 1; i < n; i++) {
+		int key = src[i];
+		int j = i - 1;
+		while (j > 0 && src[j] > key) {
+			src[j + 1] = src[j];
+			j--;
+		}
+		src[j + 1] = key;
+	}
+}
+
 
 void minHeapRebuild(int* src, int n, int pos) {
 	int _pos = pos;
@@ -32,6 +47,7 @@ void heapSort(int* src, int n) {
 	for (int* tmp = src; tmp < src + n; tmp++)
 		minHeapBuild(tmp, m--);
 }
+
 
 void digitSort(int* src, int n, int exp) {
 	int* pos = new int[10]();
