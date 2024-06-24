@@ -149,3 +149,18 @@ void radixSort_count(int* src, int n, int& count_compare) {
 	for (int exp = 1; ++count_compare && mx / exp > 0; exp *= 10)
 		digitSort_count(src, n, exp, count_compare);
 }
+
+// shell sort
+void shellSort_count(int* src, int n, int& count_compare) {
+	for (int gap = n/2;++count_compare && gap >= 1; gap /= 2) {
+		for (int i = gap; i < n; ++i) {
+			int key = src[i];
+			int j = i - gap;
+			while (++count_compare && j > 0 && ++count_compare && src[j] > key) {
+				src[j + gap] = src[j];
+				j -= gap;
+			}
+			src[j + gap] = key;
+		}
+	}
+}

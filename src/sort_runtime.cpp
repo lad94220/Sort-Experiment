@@ -149,3 +149,18 @@ void radixSort(int* src, int n) {
 	for (int exp = 1; mx / exp > 0; exp *= 10)
 		digitSort(src, n, exp);
 }
+
+// shell sort
+void shellSort(int* src, int n) {
+	for (int gap = n/2; gap >= 1; gap /= 2) {
+		for (int i = gap; i < n; ++i) {
+			int key = src[i];
+			int j = i - gap;
+			while (j > 0 && src[j] > key) {
+				src[j + gap] = src[j];
+				j -= gap;
+			}
+			src[j + gap] = key;
+		}
+	}
+}

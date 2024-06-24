@@ -79,6 +79,10 @@ void digitSort_count(int* src, int n, int exp, int& count_compare);
 void radixSort_count(int* src, int n, int& count_compare);
 
 void shakerSort_count(int* src, int n, int& count_compare);
+
+//shell sort
 void shellSort_count(int* src, int n, int& count_compare);
+
+
 void countingSort_count(int* src, int n, int& count_compare);
 void flashSort_count(int* src, int n, int& count_compare);
