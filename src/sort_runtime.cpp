@@ -1,22 +1,22 @@
 #include "sort.h"
 
-//selection sort implementation
+// selection sort
 void selectionSort(int* src, int n) {
-    for (int i = 0; i < n; i++) {
-        for (int j = i + 1; j < n; j++) {
+    for (int i = 0; i < n; ++i) {
+        for (int j = i + 1; j < n; ++j) {
             if (src[j] < src[i]) swap(src[i], src[j]);
         }
     }
 }
 
-//insertion sort implementation
+// insertion sort
 void insertionSort(int* src, int n) {
-	for (int i = 1; i < n; i++) {
+	for (int i = 1; i < n; ++i) {
 		int key = src[i];
 		int j = i - 1;
 		while (j > 0 && src[j] > key) {
 			src[j + 1] = src[j];
-			j--;
+			--j;
 		}
 		src[j + 1] = key;
 	}
@@ -47,6 +47,59 @@ void heapSort(int* src, int n) {
 	for (int* tmp = src; tmp < src + n; tmp++)
 		minHeapBuild(tmp, m--);
 }
+
+
+
+// merge sort
+void mergeSort(int* src, int n) {
+	mergeSortRecursive(src, 0, n-1);
+}
+void mergeSortRecursive(int* src, int start, int end) {
+	if (start > end) return;
+	int mid = (start + end) / 2;
+	mergeSortRecursive(src, start, mid);
+	mergeSortRecursive(src, mid+1, end);
+	mergeArrays(src, start, mid, end);
+}
+void mergeArrays(int* src, int start, int mid, int end) {
+	int left_size = mid - start + 1;
+	int right_size = end - mid;
+	int *src_left = new int[left_size];
+	int *src_right = new int[right_size];
+	for (int i = 0; i < left_size; i++) src_left[i] = src[start + i];
+	for (int i = 0; i < right_size; i++) src_right[i] = src[mid + 1 + i];
+	int left_taken = 0, right_taken = 0, fill_location = start;
+
+	while (left_taken < left_size && right_taken < right_size) {
+		if (src_left[left_taken] < src_right[right_taken]) {
+			src[fill_location] = src_left[left_taken];
+			left_taken++;
+		} else {
+			src[fill_location] = src_right[right_taken];
+			right_taken++;
+		}
+		fill_location++;
+	}
+	
+	while (left_taken < left_size) {
+		src[fill_location] = src_left[left_taken];
+		left_taken++;
+		fill_location++;
+	}
+
+	while (right_taken < right_size) {
+		src[fill_location] = src_right[right_taken];
+		right_taken++;
+		fill_location++;
+	}
+
+	delete src_left;
+	delete src_right;
+}
+
+
+
+// quick sort
 
 
 void digitSort(int* src, int n, int exp) {
