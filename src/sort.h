@@ -2,7 +2,7 @@
 #include<algorithm>
 using namespace std;
 
-//RUNTIME
+/*runtime*/
 
 void selectionSort(int* src, int n);
 void insertionSort(int* src, int n);
@@ -25,15 +25,26 @@ void shellSort(int* src, int n);
 void countingSort(int* src, int n);
 void flashSort(int* src, int n);
 
-//-----------------------------------------------------------
-//count experiments
+/*-----------------------------------------------------------*/
+
+/*count experiments*/
+
 void selectionSort_count(int* src, int n, int& count_compare);
 void insertionSort_count(int* src, int n, int& count_compare);
 void bubbleSort_count(int* src, int n, int& count_compare);
+
+//heap sort
+void minHeapRebuild_count(int* src, int n, int pos, int& count_compare);
+void minHeapBuild_count(int* src, int n, int& count_compare);
 void heapSort_count(int* src, int n, int& count_compare);
+
 void mergeSort_count(int* src, int n, int& count_compare);
 void quickSort_count(int* src, int n, int& count_compare);
+
+//radix sort
+void digitSort_count(int* src, int n, int exp, int& count_compare);
 void radixSort_count(int* src, int n, int& count_compare);
+
 void shakerSort_count(int* src, int n, int& count_compare);
 void shellSort_count(int* src, int n, int& count_compare);
 void countingSort_count(int* src, int n, int& count_compare);
