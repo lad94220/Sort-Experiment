@@ -20,6 +20,8 @@ void heapSort(int* src, int n);
 
 //merge sort
 void mergeSort(int* src, int n);
+void mergeSortRecursive(int* src, int start, int end);
+void mergeArrays(int* src, int start, int mid, int end);
 
 //quick sort
 void quickSort(int* src, int n);
@@ -42,8 +44,13 @@ void flashSort(int* src, int n);
 
 /*count experiments*/
 
+//selection sort
 void selectionSort_count(int* src, int n, int& count_compare);
+
+//insertion sort
 void insertionSort_count(int* src, int n, int& count_compare);
+
+
 void bubbleSort_count(int* src, int n, int& count_compare);
 
 //heap sort
@@ -51,7 +58,14 @@ void minHeapRebuild_count(int* src, int n, int pos, int& count_compare);
 void minHeapBuild_count(int* src, int n, int& count_compare);
 void heapSort_count(int* src, int n, int& count_compare);
 
+
+//merge sort
 void mergeSort_count(int* src, int n, int& count_compare);
+void mergeSortRecursive_count(int* src, int start, int end, int& count_compare);
+void mergeArrays_count(int* src, int start, int mid, int end, int& count_compare);
+
+
+//quick sort
 void quickSort_count(int* src, int n, int& count_compare);
 
 //radix sort

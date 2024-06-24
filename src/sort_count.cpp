@@ -1,5 +1,30 @@
 #include "sort.h"
 
+// selection sort
+void selectionSort_count(int* src, int n, int& count_compare) {
+    for (int i = 0; ++count_compare && i < n; ++i) {
+        for (int j = i + 1; ++count_compare && j < n; ++j) {
+            if (src[j] < src[i]) swap(src[i], src[j]);
+        }
+    }
+}
+
+// insertion sort
+void insertionSort_count(int* src, int n, int& count_compare) {
+	for (int i = 1; ++count_compare && i < n; ++i) {
+		int key = src[i];
+		int j = i - 1;
+		while (++count_compare && j > 0 && ++count_compare && src[j] > key) {
+			src[j + 1] = src[j];
+			--j;
+		}
+		src[j + 1] = key;
+	}
+}
+
+
+
+// heap sort
 void minHeapRebuild_count(int* src, int n, int pos, int& count_compare) {
 	int _pos = pos;
 
@@ -25,6 +50,56 @@ void heapSort_count(int* src, int n, int& count_compare) {
 		minHeapBuild_count(tmp, m--, count_compare);
 }
 
+
+// merge sort
+void mergeSort_count(int* src, int n, int& count_compare) {
+	mergeSortRecursive_count(src, 0, n - 1, count_compare);
+}
+void mergeSortRecursive_count(int* src, int start, int end, int& count_compare) {
+	if (++count_compare && start > end) return;
+	int mid = (start + end) / 2;
+	mergeSortRecursive(src, start, mid);
+	mergeSortRecursive(src, mid+1, end);
+	mergeArrays(src, start, mid, end);
+}
+void mergeArrays_count(int* src, int start, int mid, int end, int& count_compare) {
+	int left_size = mid - start + 1;
+	int right_size = end - mid;
+	int *src_left = new int[left_size];
+	int *src_right = new int[right_size];
+	for (int i = 0;++count_compare && i < left_size; i++) src_left[i] = src[start + i];
+	for (int i = 0;++count_compare && i < right_size; i++) src_right[i] = src[mid + 1 + i];
+	int left_taken = 0, right_taken = 0, fill_location = start;
+
+	while (++count_compare && left_taken < left_size && ++count_compare && right_taken < right_size) {
+		if (++count_compare && src_left[left_taken] < src_right[right_taken]) {
+			src[fill_location] = src_left[left_taken];
+			left_taken++;
+		} else {
+			src[fill_location] = src_right[right_taken];
+			right_taken++;
+		}
+		fill_location++;
+	}
+	
+	while (++count_compare && left_taken < left_size) {
+		src[fill_location] = src_left[left_taken];
+		left_taken++;
+		fill_location++;
+	}
+
+	while (++count_compare && right_taken < right_size) {
+		src[fill_location] = src_right[right_taken];
+		right_taken++;
+		fill_location++;
+	}
+
+	delete src_left;
+	delete src_right;
+}
+
+
+// radix sort
 void digitSort_count(int* src, int n, int exp, int& count_compare) {
 	int* pos = new int[10]();
 	int* dst = new int[n];
