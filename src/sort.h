@@ -7,15 +7,25 @@ using namespace std;
 void selectionSort(int* src, int n);
 void insertionSort(int* src, int n);
 void bubbleSort(int* src, int n);
+
+//heap sort
+void minHeapRebuild(int* src, int n, int pos);
+void minHeapBuild(int* src, int n);
 void heapSort(int* src, int n);
+
 void mergeSort(int* src, int n);
 void quickSort(int* src, int n);
+
+//radix sort
+void digitSort(int* src, int n, int exp);
 void radixSort(int* src, int n);
+
 void shakerSort(int* src, int n);
 void shellSort(int* src, int n);
 void countingSort(int* src, int n);
 void flashSort(int* src, int n);
 
+//-----------------------------------------------------------
 //count experiments
 void selectionSort_count(int* src, int n, int& count_compare);
 void insertionSort_count(int* src, int n, int& count_compare);
