@@ -52,13 +52,13 @@ void heapSort(int* src, int n) {
 
 // merge sort
 void mergeSort(int* src, int n) {
-	mergeSortRecursive(src, 0, n-1);
+	mergeSortHelper(src, 0, n-1);
 }
-void mergeSortRecursive(int* src, int start, int end) {
+void mergeSortHelper(int* src, int start, int end) {
 	if (start > end) return;
 	int mid = (start + end) / 2;
-	mergeSortRecursive(src, start, mid);
-	mergeSortRecursive(src, mid+1, end);
+	mergeSortHelper(src, start, mid);
+	mergeSortHelper(src, mid+1, end);
 	mergeArrays(src, start, mid, end);
 }
 void mergeArrays(int* src, int start, int mid, int end) {
@@ -100,6 +100,32 @@ void mergeArrays(int* src, int start, int mid, int end) {
 
 
 // quick sort
+void quickSort(int* src, int n) {
+	quickSortHelper(src, 0, n - 1);
+}
+void quickSortHelper(int* src, int left, int right) {
+    if (left < right) {
+        int pivot_position = partitionForQuickSort(src, left, right);
+        quickSortHelper(src, left, pivot_position-1);
+        quickSortHelper(src, pivot_position+1, right);
+    }
+}
+int partitionForQuickSort(int* src, int left, int right) {
+	srand(time(NULL));
+    int random = left + rand()%(right - left);
+    swap(src[random], src[right]);
+    int pivot = src[right];
+
+    int first_larger = left;
+    for (int i = 0; i <= right-1; i++) {
+        if (src[i] < pivot) {
+            swap(src[first_larger], src[i]);
+            ++first_larger;
+        }
+    }
+    swap(src[first_larger], src[right]);
+    return first_larger;
+}
 
 
 void digitSort(int* src, int n, int exp) {
@@ -122,4 +148,19 @@ void radixSort(int* src, int n) {
 	int mx = *max_element(src, src + n);
 	for (int exp = 1; mx / exp > 0; exp *= 10)
 		digitSort(src, n, exp);
+}
+
+// shell sort
+void shellSort(int* src, int n) {
+	for (int gap = n/2; gap >= 1; gap /= 2) {
+		for (int i = gap; i < n; ++i) {
+			int key = src[i];
+			int j = i - gap;
+			while (j > 0 && src[j] > key) {
+				src[j + gap] = src[j];
+				j -= gap;
+			}
+			src[j + gap] = key;
+		}
+	}
 }

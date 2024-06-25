@@ -53,13 +53,13 @@ void heapSort_count(int* src, int n, int& count_compare) {
 
 // merge sort
 void mergeSort_count(int* src, int n, int& count_compare) {
-	mergeSortRecursive_count(src, 0, n - 1, count_compare);
+	mergeSortHelper_count(src, 0, n - 1, count_compare);
 }
-void mergeSortRecursive_count(int* src, int start, int end, int& count_compare) {
+void mergeSortHelper_count(int* src, int start, int end, int& count_compare) {
 	if (++count_compare && start > end) return;
 	int mid = (start + end) / 2;
-	mergeSortRecursive(src, start, mid);
-	mergeSortRecursive(src, mid+1, end);
+	mergeSortHelper(src, start, mid);
+	mergeSortHelper(src, mid+1, end);
 	mergeArrays(src, start, mid, end);
 }
 void mergeArrays_count(int* src, int start, int mid, int end, int& count_compare) {
@@ -98,6 +98,34 @@ void mergeArrays_count(int* src, int start, int mid, int end, int& count_compare
 	delete src_right;
 }
 
+//quick sort
+void quickSort_count(int* src, int n, int& count_compare) {
+	quickSortHelper_count(src, 0, n - 1, count_compare);
+}
+void quickSortHelper_count(int* src, int left, int right, int& count_compare) {
+	if (++count_compare && left < right) {
+        int pivot_position = partitionForQuickSort(src, left, right);
+        quickSortHelper(src, left, pivot_position-1);
+        quickSortHelper(src, pivot_position+1, right);
+    }
+}
+int partitionForQuickSort_count(int* src, int left, int right, int& count_compare) {
+	srand(time(NULL));
+    int random = left + rand()%(right - left);
+    swap(src[random], src[right]);
+    int pivot = src[right];
+
+    int first_larger = left;
+    for (int i = 0;++count_compare && i <= right-1; i++) {
+        if (++count_compare && src[i] < pivot) {
+            swap(src[first_larger], src[i]);
+            ++first_larger;
+        }
+    }
+    swap(src[first_larger], src[right]);
+    return first_larger;
+}
+
 
 // radix sort
 void digitSort_count(int* src, int n, int exp, int& count_compare) {
@@ -120,4 +148,19 @@ void radixSort_count(int* src, int n, int& count_compare) {
 	int mx = *max_element(src, src + n);
 	for (int exp = 1; ++count_compare && mx / exp > 0; exp *= 10)
 		digitSort_count(src, n, exp, count_compare);
+}
+
+// shell sort
+void shellSort_count(int* src, int n, int& count_compare) {
+	for (int gap = n/2;++count_compare && gap >= 1; gap /= 2) {
+		for (int i = gap; i < n; ++i) {
+			int key = src[i];
+			int j = i - gap;
+			while (++count_compare && j > 0 && ++count_compare && src[j] > key) {
+				src[j + gap] = src[j];
+				j -= gap;
+			}
+			src[j + gap] = key;
+		}
+	}
 }
