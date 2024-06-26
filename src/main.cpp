@@ -2,7 +2,7 @@
 #include "sort.h"
 
 int main(int argc, char** argv) {
-    
+    srand(time(NULL));
     if (strcmp(argv[1], "-a") == 0) { //command 1,2,3
         string output_para;
         if (argc == 5) {
@@ -153,10 +153,10 @@ int main(int argc, char** argv) {
             int* array1 = new int[n];
             int data_type;
             string input_order;
-            if (argv[4] == "-rand") {data_type = 0; input_order = "randomized data";}
-            if (argv[4] == "-sorted") {data_type = 1; input_order = "sorted data";}
-            if (argv[4] == "-rev") {data_type = 2; input_order = "reversed data";}
-            if (argv[4] == "-nsorted") {data_type = 3; input_order = "nearly sorted data";}
+            if (strcmp(argv[4], "-rand") == 0) {data_type = 0; input_order = "randomized data";}
+            if (strcmp(argv[4], "-sorted") == 0) {data_type = 1; input_order = "sorted data";}
+            if (strcmp(argv[4], "-rev") == 0) {data_type = 2; input_order = "reversed data";}
+            if (strcmp(argv[4], "-nsorted") == 0) {data_type = 3; input_order = "nearly sorted data";}
             
             GenerateData(array, n, data_type);
             for (int i = 0; i < n; i++) array1[i] = array[i];
@@ -264,5 +264,7 @@ int main(int argc, char** argv) {
     else { //error
         cout << "Error command!!";
     }
+
+    
     return 0;
 }

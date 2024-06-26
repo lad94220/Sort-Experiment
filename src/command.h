@@ -2,6 +2,7 @@
 #include <string.h>
 #include <time.h>
 #include "sort.h"
+#include <chrono>
 using namespace std;
 
 void GenerateRandomData(int a[], int n);
@@ -14,4 +15,4 @@ int isNum(char* str);
 int* readFile(char* file_name, int& n);
 void writeFile(char* file_name, int* array, int n);
 int count_comparisons(int* array, int n, string algro);
-long long runtime(int* array, int n, string algro);
+double runtime(int* array, int n, string algro);
