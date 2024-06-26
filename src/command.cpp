@@ -44,7 +44,7 @@ void writeFile(char* file_name, int* array, int n) {
 }
 
 int count_comparisons(int* array, int n, string algro) {
-    int count_compare;
+    int count_compare = 0;
     if (algro == "selection-sort") selectionSort_count(array, n, count_compare);
     if (algro == "insertion-sort") insertionSort_count(array, n, count_compare);
     if (algro == "bubble-sort") bubbleSort_count(array, n, count_compare);

@@ -14,7 +14,7 @@ int main(int argc, char** argv) {
                 for (int i = 0; i < n; i++) array1[i] = array[i];
 
                 int count_compare = count_comparisons(array, n, argv[2]);
-                long long run_time = runtime(array1, n, argv[2]);
+                auto run_time = runtime(array1, n, argv[2]);
 
                 //write sorted array
                 writeFile("output.txt", array, n);
