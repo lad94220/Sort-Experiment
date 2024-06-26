@@ -2,7 +2,6 @@
 #include "sort.h"
 
 int main(int argc, char** argv) {
-    srand(time(NULL));
     if (strcmp(argv[1], "-a") == 0) { //command 1,2,3
         string output_para;
         if (argc == 5) {
@@ -13,8 +12,8 @@ int main(int argc, char** argv) {
                 int* array1 = new int[n];
                 for (int i = 0; i < n; i++) array1[i] = array[i];
 
-                int count_compare = count_comparisons(array, n, argv[2]);
-                auto run_time = runtime(array1, n, argv[2]);
+                long long count_compare = count_comparisons(array, n, argv[2]);
+                double run_time = runtime(array1, n, argv[2]);
 
                 //write sorted array
                 writeFile("output.txt", array, n);
@@ -164,8 +163,8 @@ int main(int argc, char** argv) {
             //write generated array
             writeFile("input.txt", array, n);
 
-            int count_compare = count_comparisons(array1, n, argv[2]);
-            long long run_time = runtime(array, n, argv[2]);
+            long long count_compare = count_comparisons(array1, n, argv[2]);
+            double run_time = runtime(array, n, argv[2]);
 
             //write sorted array
             writeFile("output.txt", array, n);
@@ -260,11 +259,82 @@ int main(int argc, char** argv) {
             delete array2;
             delete array3;
         }
-    } 
+    }
+    else if (strcmp(argv[1], "-e") == 0) {
+        int n = stoi(argv[2]);
+        int data_type;
+        string input_order = argv[3];
+        int* src = new int[n];
+        int* array1 = new int[n];
+        int* array2 = new int[n];
+
+        if (input_order == "-rand") data_type = 0;
+        if (input_order == "-nsorted") data_type = 3;
+        if (input_order == "-sorted") data_type = 1;
+        if (input_order == "-rev") data_type = 2;
+
+        GenerateData(src, n, data_type);
+    
+        //console output
+        cout << "Runtime | Comparisions\n";
+        //selection
+        for (int i = 0; i < n; i++) array1[i] = src[i];
+        for (int i = 0; i < n; i++) array2[i] = src[i];
+        cout << "Selection sort: " << runtime(array1, n, "selection-sort") << " | " 
+                                   << count_comparisons(array2, n, "selection-sort") << endl;
+        //insertion
+        for (int i = 0; i < n; i++) array1[i] = src[i];
+        for (int i = 0; i < n; i++) array2[i] = src[i];
+        cout << "Insertion sort: " << runtime(array1, n, "insertion-sort") 
+                                   << " | " << count_comparisons(array2, n, "insertion-sort") << endl;
+        //bubble
+        for (int i = 0; i < n; i++) array1[i] = src[i];
+        for (int i = 0; i < n; i++) array2[i] = src[i];
+        cout << "Bubble sort: " << runtime(array1, n, "bubble-sort") << " | " 
+                                << count_comparisons(array2, n, "bubble-sort") << endl;
+        //heap
+        for (int i = 0; i < n; i++) array1[i] = src[i];
+        for (int i = 0; i < n; i++) array2[i] = src[i];
+        cout << "Heap sort: " << runtime(array1, n, "heap-sort") << " | " 
+                              << count_comparisons(array2, n, "heap-sort") << endl;
+        //merge
+        for (int i = 0; i < n; i++) array1[i] = src[i];
+        for (int i = 0; i < n; i++) array2[i] = src[i];
+        cout << "Merge sort: " << runtime(array1, n, "merge-sort") << " | " 
+                               << count_comparisons(array2, n, "merge-sort") << endl;
+        //quick
+        for (int i = 0; i < n; i++) array1[i] = src[i];
+        for (int i = 0; i < n; i++) array2[i] = src[i];
+        cout << "Quick sort: " << runtime(array1, n, "quick-sort") << " | " 
+                               << count_comparisons(array2, n, "quick-sort") << endl;
+        //radix
+        for (int i = 0; i < n; i++) array1[i] = src[i];
+        for (int i = 0; i < n; i++) array2[i] = src[i];
+        cout << "Radix sort: " << runtime(array1, n, "radix-sort") << " | " 
+                               << count_comparisons(array2, n, "radix-sort") << endl;
+        //shaker
+        for (int i = 0; i < n; i++) array1[i] = src[i];
+        for (int i = 0; i < n; i++) array2[i] = src[i];
+        cout << "Shaker sort: " << runtime(array1, n, "shaker-sort") << " | " 
+                                << count_comparisons(array2, n, "shaker-sort") << endl;
+        //shell
+        for (int i = 0; i < n; i++) array1[i] = src[i];
+        for (int i = 0; i < n; i++) array2[i] = src[i];
+        cout << "Shell sort: " << runtime(array1, n, "shell-sort") << " | " 
+                               << count_comparisons(array2, n, "shell-sort") << endl;
+        //counting
+        for (int i = 0; i < n; i++) array1[i] = src[i];
+        for (int i = 0; i < n; i++) array2[i] = src[i];
+        cout << "Counting sort: " << runtime(array1, n, "counting-sort") << " | " 
+                                  << count_comparisons(array2, n, "counting-sort") << endl;
+        //flash
+        for (int i = 0; i < n; i++) array1[i] = src[i];
+        for (int i = 0; i < n; i++) array2[i] = src[i];
+        cout << "Flash sort: " << runtime(array1, n, "flash-sort") << " | " 
+                               << count_comparisons(array2, n, "flash-sort") << endl;
+    }
     else { //error
         cout << "Error command!!";
     }
-
-    
     return 0;
 }
