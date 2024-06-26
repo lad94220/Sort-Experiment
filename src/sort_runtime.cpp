@@ -17,9 +17,11 @@ int minVal(int* start, int* end) {
 // selection sort
 void selectionSort(int* src, int n) {
     for (int i = 0; i < n; ++i) {
+		int mind_idex = i;
         for (int j = i + 1; j < n; ++j) {
-            if (src[j] < src[i]) swap(src[i], src[j]);
+            if (src[j] < src[mind_idex]) mind_idex = j;
         }
+		if (mind_idex != i) swap(src[mind_idex], src[i]);
     }
 }
 

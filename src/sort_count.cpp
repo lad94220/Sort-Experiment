@@ -16,10 +16,12 @@ int minVal_count(int* start, int* end, long long& count_compare) {
 
 // selection sort
 void selectionSort_count(int* src, int n, long long& count_compare) {
-    for (int i = 0; ++count_compare && i < n; ++i) {
-        for (int j = i + 1; ++count_compare && j < n; ++j) {
-            if (src[j] < src[i]) swap(src[i], src[j]);
+    for (int i = 0;++count_compare && i < n; ++i) {
+		int mind_idex = i;
+        for (int j = i + 1;++count_compare && j < n; ++j) {
+            if (++count_compare && src[j] < src[mind_idex]) mind_idex = j;
         }
+		if (++count_compare && mind_idex != i) swap(src[mind_idex], src[i]);
     }
 }
 
