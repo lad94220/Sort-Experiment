@@ -1,5 +1,19 @@
 #include "sort.h"
 
+int maxVal(int* start, int* end) {
+	int mx = *start;
+	for (int* run = start; run < end; run++)
+		if (*run > mx) mx = *run;
+	return mx;
+}
+
+int minVal(int* start, int* end) {
+	int mn = *start;
+	for (int* run = start; run < end; run++)
+		if (*run < mn) mn = *run;
+	return mn;
+}
+
 // selection sort
 void selectionSort(int* src, int n) {
     for (int i = 0; i < n; ++i) {
@@ -155,7 +169,7 @@ void digitSort(int* src, int n, int exp) {
 	delete[]pos;
 }
 void radixSort(int* src, int n) {
-	int mx = *max_element(src, src + n);
+	int mx = maxVal(src, src + n);
 	for (int exp = 1; mx / exp > 0; exp *= 10)
 		digitSort(src, n, exp);
 }
@@ -195,4 +209,55 @@ void shellSort(int* src, int n) {
 			src[j + gap] = key;
 		}
 	}
+}
+
+//counting sort
+void countingSort(int* src, int n) {
+	int mx = maxVal(src, src + n);
+	int* pos = new int[mx + 1]();
+	int* dst = new int[n];
+
+	for (int i = 0; i < n; i++)
+		pos[src[i]]++;
+	for (int i = 1; i <= mx; i++)
+		pos[i] += pos[i - 1];
+	for (int i = n - 1; i >= 0; i--)
+		dst[--pos[src[i]]] = src[i];
+	for (int i = 0; i < n; i++)
+		src[i] = dst[i];
+
+	delete[]dst;
+	delete[]pos;
+}
+
+//flash sort
+void flashSort(int* src, int n) {
+	int mx = maxVal(src, src + n);
+	int mn = minVal(src, src + n);
+
+	int bucketNum = (int)(0.45 * n);
+	int* bucket = new int[bucketNum]();
+	int* dst = new int[n];
+	int* pos = new int[bucketNum];
+
+	for (int i = 0; i < n; i++)
+		bucket[(bucketNum - 1) * (src[i] - mn) / (mx - mn)]++;
+	pos[0] = bucket[0];
+	for (int i = 1; i < bucketNum; i++)
+		pos[i] = bucket[i] + pos[i - 1];
+	for (int i = n - 1; i >= 0; i--)
+		dst[--pos[(bucketNum - 1) * (src[i] - mn) / (mx - mn)]] = src[i];
+	for (int i = 0; i < n; i++)
+		src[i] = dst[i];
+	int ind = 0;
+	int* run = src;
+	while (run < src + n) {
+		int len = bucket[ind];
+		selectionSort(run, len);
+		run += bucket[ind++];
+	}
+
+	delete[]pos;
+	delete[]dst;
+	delete[]bucket;
 }
