@@ -157,6 +157,21 @@ void radixSort_count(int* src, int n, int& count_compare) {
 		digitSort_count(src, n, exp, count_compare);
 }
 
+// shaker sort
+void shakerSort_count(int* src, int n, int& count_compare) {
+	int left = 0, right = n - 1;
+	while (++count_compare && left < right) {
+		for (int i = left; ++count_compare && i < right; i++) {
+			if (++count_compare && src[i] > src[i + 1]) swap(src[i], src[i + 1]);
+		}
+		right--;
+		for (int i = right; ++count_compare && i > left; i--) {
+			if (++count_compare && src[i] < src[i - 1]) swap(src[i], src[i - 1]);
+		}
+		left++;
+	}
+}
+
 // shell sort
 void shellSort_count(int* src, int n, int& count_compare) {
 	for (int gap = n/2;++count_compare && gap >= 1; gap /= 2) {

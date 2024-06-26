@@ -160,6 +160,28 @@ void radixSort(int* src, int n) {
 		digitSort(src, n, exp);
 }
 
+void shakerSort(int* src, int n)
+{
+	int left = 0, right = n - 1;
+	int last = right;
+	while (left < right) {
+		for (int i = right; i > left; i--) {
+			if (src[i] < src[i - 1]) {
+				swap(src[i], src[i - 1]);
+				last = i;
+			}
+		}
+		left = last;
+		for (int i = left; i < right; i++) {
+			if (src[i] > src[i + 1]) {
+				swap(src[i], src[i + 1]);
+				last = i;
+			}
+		}
+		right = last;
+	}
+}
+
 // shell sort
 void shellSort(int* src, int n) {
 	for (int gap = n/2; gap >= 1; gap /= 2) {
