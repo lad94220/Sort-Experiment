@@ -4,6 +4,8 @@
 using namespace std;
 
 /*runtime*/
+int maxVal(int* start, int* end);
+int minVal(int* start, int* end);
 
 //selection sort
 void selectionSort(int* src, int n);
@@ -39,14 +41,17 @@ void shakerSort(int* src, int n);
 //shell sort
 void shellSort(int* src, int n);
 
-
-
+//counting sort
 void countingSort(int* src, int n);
+
+//flash sort
 void flashSort(int* src, int n);
 
 /*-----------------------------------------------------------*/
 
 /*count experiments*/
+int maxVal_count(int* start, int* end, int& count_compare);
+int minVal_count(int* start, int* end, int& count_compare);
 
 //selection sort
 void selectionSort_count(int* src, int n, int& count_compare);
@@ -83,6 +88,8 @@ void shakerSort_count(int* src, int n, int& count_compare);
 //shell sort
 void shellSort_count(int* src, int n, int& count_compare);
 
-
+//counting sort
 void countingSort_count(int* src, int n, int& count_compare);
+
+//flash sort
 void flashSort_count(int* src, int n, int& count_compare);
