@@ -15,11 +15,13 @@ int minVal_count(int* start, int* end, unsigned long long& count_compare) {
 }
 
 // selection sort
-void selectionSort_count(int* src, int n, unsigned long long& count_compare) {
-    for (int i = 0; ++count_compare && i < n; ++i) {
-        for (int j = i + 1; ++count_compare && j < n; ++j) {
-            if (src[j] < src[i]) swap(src[i], src[j]);
+void selectionSort_count(int* src, int n, long long& count_compare) {
+    for (int i = 0;++count_compare && i < n; ++i) {
+		int mind_idex = i;
+        for (int j = i + 1;++count_compare && j < n; ++j) {
+            if (++count_compare && src[j] < src[mind_idex]) mind_idex = j;
         }
+		if (++count_compare && mind_idex != i) swap(src[mind_idex], src[i]);
     }
 }
 
@@ -134,17 +136,18 @@ int partitionForQuickSort_count(int* src, int left, int right, unsigned long lon
 	srand(time(NULL));
     int random = left + rand()%(right - left);
     swap(src[random], src[right]);
+
     int pivot = src[right];
-    int first_larger = left;
+    int first_larger = left - 1;
 	
-    for (int i = left;++count_compare && i <= right-1; i++) {
-        if (++count_compare && src[i] < pivot) {
+    for (int i = left;++count_compare && i < right; i++) {
+        if (++count_compare && src[i] <= pivot) {
 			++first_larger;
             swap(src[first_larger], src[i]);
         }
     }
-    swap(src[first_larger], src[right]);
-    return first_larger;
+    swap(src[first_larger + 1], src[right]);
+    return first_larger + 1;
 }
 
 
