@@ -1,36 +1,70 @@
-Introduction and Analysis of algorithms
+Introduction and Analysis of Sorting Algorithms
+
 
 ------------Selection Sort-----------
+*Introduction[1]: A simple sorting algorithm that repeatedly searches remaining items to find the least one and moves it to its final location.
+*Algorithm Steps:
 step 1: Go through the unsorted part of the array to find the smallest element (In the first run, sorted part's number of element is 0)
-step 2: Swap the smallest element in step 1 with the first element behind sorted part
-step 3: Move the boundary between sorted part and unsorted part by one position toward the end of array
-step 3: If the number of sorted part's element is not equal to the number of element in the array, go back to step 1, else the given array is sorted
+step 2: Swap the smallest element found in step 1 with the first element behind the sorted part
+step 3: Move the boundary between the sorted part and the unsorted part by one position toward the end of the array
+step 3: If the number of elements in the sorted part is not equal to the number of elements in the array, go back to step 1. Otherwise, the array is sorted
+*Complexity Analysis: As selection sort does not take advantage of the array's distribution and always performs the same operations, the complexity remains the same in the best-case and worst-case scenarios. 
+    Best-case time complexity: O(n^2)
+    Average-case time complexity: O(n^2)
+    Worst-case time complexity: O(n^2)
 
 ------------Insertion Sort------------
+*Introduction:
+
+*Algorithm Steps:
 step 1: Pick the first element (As there's just one element, the sorted part's number of element will be 1)
 step 2: Pick the first element behind the sorted part
 step 3: Use binary search to find the right position for picked element in the sorted part
 step 4: Insert the element into the sorted part with the position found in step 3
 step 5: Move the boundary between sorted part and unsorted part by one position toward the end of array
 step 6: If the number of sorted part's element is not equal to the number of element in the array, go back to step 2, else the given array is sorted
-
-------------Merge Sort------------
+*Complexity Analysis:
+*Optimizations:
 
 ------------Bubble Sort------------
+*Introduction:
+*Algorithm Steps:
+*Complexity Analysis:
+*Optimizations:
 
 ------------Heap Sort------------
+*Introduction:
+*Algorithm Steps:
+*Complexity Analysis:
+*Optimizations:
 
 ------------Merge Sort------------
+*Introduction:
+*Algorithm Steps:
+*Complexity Analysis:
+*Optimizations:
 
 ------------Quick Sort------------
-
-------------Quick Sort------------
+*Introduction:
+*Algorithm Steps:
+*Complexity Analysis:
+*Optimizations:
 
 ------------Radix Sort------------
+*Introduction:
+*Algorithm Steps:
+*Complexity Analysis:
+*Optimizations:
 
 ------------Shaker Sort------------
+*Introduction:
+*Algorithm Steps:
+*Complexity Analysis:
+*Optimizations:
 
 ------------Shell sort------------
+*Introduction:
+*Algorithm Steps:
 D1. [Loop on s.] Perform step D2 for s = t − 1, t − 2, . . ., 0; then
 terminate the algorithm.
 D2. [Loop on j.] Set h ← hs, and perform steps D3 through D6 for h
@@ -43,9 +77,21 @@ D4. [Compare K : Ki.] If K ≥ Ki, go to step D6.
 D5. [Move Ri, decrease i.] Set Ri+h ← Ri, then i ← i − h. If i > 0, go
 back to step D4.
 D6. [R into Ri+h.] Set Ri+h ← R
+*Complexity Analysis:
+*Optimizations:
 
 ------------Counting Sort------------
-step 1: 
-
+*Introduction:
+*Algorithm Steps:
+*Complexity Analysis:
+*Optimizations:
 
 ------------Flash Sort------------
+*Introduction:
+*Algorithm Steps:
+*Complexity Analysis:
+*Optimizations:
+
+
+References:
+[1]: Paul E. Black, "selection sort", in Dictionary of Algorithms and Data Structures [online], Paul E. Black, ed. 21 April 2022, https://www.nist.gov/dads/HTML/selectionSort.html. Accessed 26 June 2024.
