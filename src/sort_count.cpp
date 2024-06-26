@@ -136,17 +136,18 @@ int partitionForQuickSort_count(int* src, int left, int right, long long& count_
 	srand(time(NULL));
     int random = left + rand()%(right - left);
     swap(src[random], src[right]);
+
     int pivot = src[right];
-    int first_larger = left;
+    int first_larger = left - 1;
 	
-    for (int i = left;++count_compare && i <= right-1; i++) {
-        if (++count_compare && src[i] < pivot) {
+    for (int i = left;++count_compare && i < right; i++) {
+        if (++count_compare && src[i] <= pivot) {
 			++first_larger;
             swap(src[first_larger], src[i]);
         }
     }
-    swap(src[first_larger], src[right]);
-    return first_larger;
+    swap(src[first_larger + 1], src[right]);
+    return first_larger + 1;
 }
 
 
