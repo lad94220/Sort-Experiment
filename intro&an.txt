@@ -2,7 +2,7 @@ Introduction and Analysis of Sorting Algorithms
 
 
 ------------Selection Sort-----------
-*Introduction[1]: A simple sorting algorithm that repeatedly searches remaining items to find the least one and moves it to its final location.
+*Introduction: A simple sorting algorithm that repeatedly searches remaining items to find the least one and moves it to its final location[1], which mirrors the way we often sort items by hand.
 *Algorithm Steps:
 step 1: Go through the unsorted part of the array to find the smallest element (In the first run, sorted part's number of element is 0)
 step 2: Swap the smallest element found in step 1 with the first element behind the sorted part
@@ -14,17 +14,19 @@ step 3: If the number of elements in the sorted part is not equal to the number 
     Worst-case time complexity: O(n^2)
 
 ------------Insertion Sort------------
-*Introduction:
-
+*Introduction: A simple sorting algorithm that sorts by repeatedly taking the next item and inserting it into the final data structure in its proper order with respect to items already inserted[2].
 *Algorithm Steps:
-step 1: Pick the first element (As there's just one element, the sorted part's number of element will be 1)
+step 1: Pick the first element (As there's just one element, the number of elements in the sorted part will be 1.)
 step 2: Pick the first element behind the sorted part
-step 3: Use binary search to find the right position for picked element in the sorted part
-step 4: Insert the element into the sorted part with the position found in step 3
+step 3: Compare it with each element in the sorted part to find the target position
+step 4: Insert the element into the sorted part at the position found in step 3
 step 5: Move the boundary between sorted part and unsorted part by one position toward the end of array
-step 6: If the number of sorted part's element is not equal to the number of element in the array, go back to step 2, else the given array is sorted
-*Complexity Analysis:
-*Optimizations:
+step 6: If the number of sorted part's element is not equal to the number of element in the array, go back to step 2. Otherwise, the array is sorted.
+*Complexity Analysis: 
+    Best-case time complexity: O(n) - happens when the array is already sorted
+    Average-case time complexity: O(n^2)
+    Worst-case time complexity: O(n^2)
+*Optimizations: When the comparisons are expensive, we can use binary search instead of comparing each elements to find the position in step 3.
 
 ------------Bubble Sort------------
 *Introduction:
@@ -95,3 +97,4 @@ D6. [R into Ri+h.] Set Ri+h ← R
 
 References:
 [1]: Paul E. Black, "selection sort", in Dictionary of Algorithms and Data Structures [online], Paul E. Black, ed. 21 April 2022, https://www.nist.gov/dads/HTML/selectionSort.html. Accessed 26 June 2024.
+[2]: Paul E. Black, "insertion sort", in Dictionary of Algorithms and Data Structures [online], Paul E. Black, ed. 6 April 2023,https://www.nist.gov/dads/HTML/insertionSort.html. Accessed 26 June 2024.
