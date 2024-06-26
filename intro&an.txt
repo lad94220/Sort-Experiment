@@ -26,7 +26,7 @@ step 6: If the number of sorted part's element is not equal to the number of ele
     Best-case time complexity: O(n) - happens when the array is already sorted
     Average-case time complexity: O(n^2)
     Worst-case time complexity: O(n^2)
-*Optimizations: When the comparisons are expensive, we can use binary search instead of comparing each elements to find the position in step 3.
+*Optimizations: When comparisons are expensive, we can use binary search instead of comparing each element to find the position in step 3. However, this would make the sort unstable when there are duplicate elements.
 
 ------------Bubble Sort------------
 *Introduction:
@@ -41,10 +41,18 @@ step 6: If the number of sorted part's element is not equal to the number of ele
 *Optimizations:
 
 ------------Merge Sort------------
-*Introduction:
+*Introduction: Merge sort is an algorithm that follows the divide-and-conquer method. Starting with the entire array A[1:n], it recurses down to smaller and smaller subarrays. The key operation of the merge sort algorithm occurs in the "combine" step, which merges two adjacent, sorted subarrays[3].
 *Algorithm Steps:
-*Complexity Analysis:
-*Optimizations:
+step 1: If the input array has only 1 element, return that input array as sorted. If the input array has more than 1 element, continue to step 2.
+step 2: Split the input array into 2 smaller arrays, the first subarray (subarray 1) takes the original array's first half number of elements, the second subarray (subarray 2) takes the remain elements in the input array.
+step 3: Perform step 1-3 for each of the two subarrays as input arrays.
+step 4: Compare the first untaken element of subarray 1 with the first untaken element of subarray 2, and add the smaller element to the input array to the first position of unsorted part. If either sub-array has no untaken element left, add the first untaken element of the other sub-array to the input array.
+step 5: Increate the number of taken element of the sub-array that provided an element by 1, increase the number of sorted element in the input array by 1.
+step 6: If the number of elements in the sorted part is not equal to the number of elements of the input array, go back to step 4. Otherwise, the input array is sorted.
+*Complexity Analysis: Because merge sort splits the entire n-array to n 1-element arrays then merges them to sort, the complexity does not depend on the array's distribution.
+    Best-case time complexity: O(nlog(n))
+    Average-case time complexity: O(nlog(n))
+    Worst-case time complexity: O(nlog(n))
 
 ------------Quick Sort------------
 *Introduction:
@@ -98,3 +106,4 @@ D6. [R into Ri+h.] Set Ri+h ← R
 References:
 [1]: Paul E. Black, "selection sort", in Dictionary of Algorithms and Data Structures [online], Paul E. Black, ed. 21 April 2022, https://www.nist.gov/dads/HTML/selectionSort.html. Accessed 26 June 2024.
 [2]: Paul E. Black, "insertion sort", in Dictionary of Algorithms and Data Structures [online], Paul E. Black, ed. 6 April 2023,https://www.nist.gov/dads/HTML/insertionSort.html. Accessed 26 June 2024.
+[3]: Cormen, T.H., Leiserson, C.E., Rivest, R.L. and Stein, C., 2022. Introduction to Algorithms. 4th ed. Cambridge, MA: MIT Press, pp. 35-36.
