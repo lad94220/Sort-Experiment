@@ -140,17 +140,18 @@ int partitionForQuickSort(int* src, int left, int right) {
 	srand(time(NULL));
     int random = left + rand()%(right - left);
     swap(src[random], src[right]);
-    int pivot = src[right];
-    int first_larger = left;
 
-    for (int i = left; i <= right-1; i++) {
+    int pivot = src[right];
+    int first_larger = left - 1;
+
+    for (int i = left; i < right; i++) {
         if (src[i] <= pivot) {
 			++first_larger;
             swap(src[first_larger], src[i]);
         }
     }
-    swap(src[first_larger], src[right]);
-    return first_larger;
+    swap(src[first_larger + 1], src[right]);
+    return first_larger + 1;
 }
 
 
