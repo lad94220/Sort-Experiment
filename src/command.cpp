@@ -51,8 +51,8 @@ int count_comparisons(int* array, int n, string algro) {
     if (algro == "radix-sort") radixSort_count(array, n, count_compare);
     if (algro == "shaker-sort") shakerSort_count(array, n, count_compare);
     if (algro == "shell-sort") shellSort_count(array, n, count_compare);
-    //if (algro == "counting-sort") countingSort_count(array, n, count_compare);
-    //if (algro == "flash-sort"); flashSort_count(array, n, count_compare);
+    if (algro == "counting-sort") countingSort_count(array, n, count_compare);
+    if (algro == "flash-sort"); flashSort_count(array, n, count_compare);
     return count_compare;
 }
 
@@ -68,8 +68,8 @@ double runtime(int* array, int n, string algro) {
     if (algro == "radix-sort") {start = clock(); radixSort(array, n); end = clock();}
     if (algro == "shaker-sort") {start = clock(); shakerSort(array, n); end = clock();}
     if (algro == "shell-sort") {start = clock(); shellSort(array, n); end = clock();}
-    //if (algro == "counting-sort") {start = clock(); countingSort(array, n); end = clock();}
-    //if (algro == "flash-sort"); {start = clock(); flashSort(array, n); end = clock();}
+    if (algro == "counting-sort") {start = clock(); countingSort(array, n); end = clock();}
+    if (algro == "flash-sort"); {start = clock(); flashSort(array, n); end = clock();}
     duration = (double)(end - start) / CLOCKS_PER_SEC * 1000.0;
     return duration;
 }
