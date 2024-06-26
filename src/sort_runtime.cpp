@@ -65,7 +65,7 @@ void mergeSort(int* src, int n) {
 	mergeSortHelper(src, 0, n-1);
 }
 void mergeSortHelper(int* src, int start, int end) {
-	if (start > end) return;
+	if (start >= end) return;
 	int mid = (start + end) / 2;
 	mergeSortHelper(src, start, mid);
 	mergeSortHelper(src, mid+1, end);
@@ -125,12 +125,12 @@ int partitionForQuickSort(int* src, int left, int right) {
     int random = left + rand()%(right - left);
     swap(src[random], src[right]);
     int pivot = src[right];
-
     int first_larger = left;
-    for (int i = 0; i <= right-1; i++) {
-        if (src[i] < pivot) {
+
+    for (int i = left; i <= right-1; i++) {
+        if (src[i] <= pivot) {
+			++first_larger;
             swap(src[first_larger], src[i]);
-            ++first_larger;
         }
     }
     swap(src[first_larger], src[right]);
