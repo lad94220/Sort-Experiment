@@ -56,7 +56,7 @@ void mergeSort_count(int* src, int n, int& count_compare) {
 	mergeSortHelper_count(src, 0, n - 1, count_compare);
 }
 void mergeSortHelper_count(int* src, int start, int end, int& count_compare) {
-	if (++count_compare && start > end) return;
+	if (++count_compare && start >= end) return;
 	int mid = (start + end) / 2;
 	mergeSortHelper(src, start, mid);
 	mergeSortHelper(src, mid+1, end);
@@ -114,12 +114,12 @@ int partitionForQuickSort_count(int* src, int left, int right, int& count_compar
     int random = left + rand()%(right - left);
     swap(src[random], src[right]);
     int pivot = src[right];
-
     int first_larger = left;
-    for (int i = 0;++count_compare && i <= right-1; i++) {
+	
+    for (int i = left;++count_compare && i <= right-1; i++) {
         if (++count_compare && src[i] < pivot) {
+			++first_larger;
             swap(src[first_larger], src[i]);
-            ++first_larger;
         }
     }
     swap(src[first_larger], src[right]);
