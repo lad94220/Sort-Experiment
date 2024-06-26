@@ -65,7 +65,7 @@ step 4: Repeat steps 1-3 with 2 subarrays on the left/right of the pivot.
     Best-case time complexity: O(nlog(n)) - happens when we always pick the pivot to be the median of the array, then 2 subarrays will be 2 perfect halves; hence we will recurse log(n) times
     Average-case time complexity: O(nlog(n)) - depends on the chosen pivot are good or bad, but on average, a good split will eventually absorb a bad split hence the complexity will be O(nlog(n)) with some hidden contants (Cormen, Leiserson, Rivest, & Stein, 2022, pp. 191).
     Worst-case time complexity: O(n^2) - happens when we always pick the pivot to be either the smallest or the largest element in the array, then we will have to recurse n times
-*Optimizations: To avoid the worst-case scenario, we can randomly choose the pivot, as implemented above. Alternatively, we can use Tukey's ninther to approximate the median of the given array. Another method is to combine Quick Sort with another sorting algorithm, such as Insertion Sort, to avoid deep recursion. Additionally, multi-pivot Quick Sort can be employed, though it may be more challenging to implement.
+*Optimizations: To avoid the worst-case scenario, we can randomly choose the pivot, as implemented above. Alternatively, we can use Tukey's ninther to approximate the median of the given array to have a better pivot selection. Another method is to combine Quick Sort with another sorting algorithm, such as Insertion Sort, to avoid deep recursion. Additionally, multi-pivot Quick Sort can be employed, though it may be more challenging to implement.
 
 ------------Radix Sort------------
 *Introduction:
