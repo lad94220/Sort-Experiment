@@ -22,7 +22,14 @@ void insertionSort_count(int* src, int n, int& count_compare) {
 	}
 }
 
-
+// bubble sort
+void bubbleSort_count(int* src, int n, int& count_compare) {
+	for (int i = 0; ++count_compare && i < n; ++i) {
+		for (int j = 0; ++count_compare && j < n - i - 1; ++j) {
+			if (++count_compare && src[j] > src[j + 1]) swap(src[j], src[j + 1]);
+		}
+	}
+}
 
 // heap sort
 void minHeapRebuild_count(int* src, int n, int pos, int& count_compare) {
