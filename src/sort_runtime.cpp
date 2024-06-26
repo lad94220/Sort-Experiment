@@ -22,6 +22,16 @@ void insertionSort(int* src, int n) {
 	}
 }
 
+void bubbleSort(int* src, int n)
+{
+	for (int i = 0; i < n; ++i) {
+		for (int j = 0; j < n - i - 1; ++j) {
+			if (src[j] > src[j + 1]) swap(src[j], src[j + 1]);
+		}
+	}
+
+}
+
 
 void minHeapRebuild(int* src, int n, int pos) {
 	int _pos = pos;
@@ -148,6 +158,28 @@ void radixSort(int* src, int n) {
 	int mx = *max_element(src, src + n);
 	for (int exp = 1; mx / exp > 0; exp *= 10)
 		digitSort(src, n, exp);
+}
+
+void shakerSort(int* src, int n)
+{
+	int left = 0, right = n - 1;
+	int last = right;
+	while (left < right) {
+		for (int i = right; i > left; i--) {
+			if (src[i] < src[i - 1]) {
+				swap(src[i], src[i - 1]);
+				last = i;
+			}
+		}
+		left = last;
+		for (int i = left; i < right; i++) {
+			if (src[i] > src[i + 1]) {
+				swap(src[i], src[i + 1]);
+				last = i;
+			}
+		}
+		right = last;
+	}
 }
 
 // shell sort

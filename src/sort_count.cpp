@@ -22,7 +22,14 @@ void insertionSort_count(int* src, int n, int& count_compare) {
 	}
 }
 
-
+// bubble sort
+void bubbleSort_count(int* src, int n, int& count_compare) {
+	for (int i = 0; ++count_compare && i < n; ++i) {
+		for (int j = 0; ++count_compare && j < n - i - 1; ++j) {
+			if (++count_compare && src[j] > src[j + 1]) swap(src[j], src[j + 1]);
+		}
+	}
+}
 
 // heap sort
 void minHeapRebuild_count(int* src, int n, int pos, int& count_compare) {
@@ -148,6 +155,21 @@ void radixSort_count(int* src, int n, int& count_compare) {
 	int mx = *max_element(src, src + n);
 	for (int exp = 1; ++count_compare && mx / exp > 0; exp *= 10)
 		digitSort_count(src, n, exp, count_compare);
+}
+
+// shaker sort
+void shakerSort_count(int* src, int n, int& count_compare) {
+	int left = 0, right = n - 1;
+	while (++count_compare && left < right) {
+		for (int i = left; ++count_compare && i < right; i++) {
+			if (++count_compare && src[i] > src[i + 1]) swap(src[i], src[i + 1]);
+		}
+		right--;
+		for (int i = right; ++count_compare && i > left; i--) {
+			if (++count_compare && src[i] < src[i - 1]) swap(src[i], src[i - 1]);
+		}
+		left++;
+	}
 }
 
 // shell sort
