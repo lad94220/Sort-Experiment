@@ -1,5 +1,19 @@
 #include "sort.h"
 
+int maxVal_count(int* start, int* end, int& count_compare) {
+	int mx = *start;
+	for (int* run = start; ++count_compare && run < end; run++)
+		if (++count_compare && *run > mx) mx = *run;
+	return mx;
+}
+
+int minVal_count(int* start, int* end, int& count_compare) {
+	int mn = *start;
+	for (int* run = start; ++count_compare && run < end; run++)
+		if (++count_compare && *run < mn) mn = *run;
+	return mn;
+}
+
 // selection sort
 void selectionSort_count(int* src, int n, int& count_compare) {
     for (int i = 0; ++count_compare && i < n; ++i) {
@@ -152,7 +166,7 @@ void digitSort_count(int* src, int n, int exp, int& count_compare) {
 	delete[]pos;
 }
 void radixSort_count(int* src, int n, int& count_compare) {
-	int mx = *max_element(src, src + n);
+	int mx = maxVal_count(src, src + n, count_compare);
 	for (int exp = 1; ++count_compare && mx / exp > 0; exp *= 10)
 		digitSort_count(src, n, exp, count_compare);
 }
@@ -185,4 +199,55 @@ void shellSort_count(int* src, int n, int& count_compare) {
 			src[j + gap] = key;
 		}
 	}
+}
+
+//counting sort
+void countingSort_count(int* src, int n, int& count_compare) {
+	int mx = maxVal_count(src, src + n, count_compare);
+	int* pos = new int[mx + 1]();
+	int* dst = new int[n];
+
+	for (int i = 0; ++count_compare && i < n; i++)
+		pos[src[i]]++;
+	for (int i = 1; ++count_compare && i <= mx; i++)
+		pos[i] += pos[i - 1];
+	for (int i = n - 1; ++count_compare && i >= 0; i--)
+		dst[--pos[src[i]]] = src[i];
+	for (int i = 0; ++count_compare && i < n; i++)
+		src[i] = dst[i];
+
+	delete[]dst;
+	delete[]pos;
+}
+
+//flash sort
+void flashSort_count(int* src, int n, int& count_compare) {
+	int mx = maxVal_count(src, src + n, count_compare);
+	int mn = minVal_count(src, src + n, count_compare);
+
+	int bucketNum = (int)(0.45 * n);
+	int* bucket = new int[bucketNum]();
+	int* dst = new int[n];
+	int* pos = new int[bucketNum];
+
+	for (int i = 0; ++count_compare && i < n; i++)
+		bucket[(bucketNum - 1) * (src[i] - mn) / (mx - mn)]++;
+	pos[0] = bucket[0];
+	for (int i = 1; ++count_compare && i < bucketNum; i++)
+		pos[i] = bucket[i] + pos[i - 1];
+	for (int i = n - 1; ++count_compare && i >= 0; i--)
+		dst[--pos[(bucketNum - 1) * (src[i] - mn) / (mx - mn)]] = src[i];
+	for (int i = 0; ++count_compare && i < n; i++)
+		src[i] = dst[i];
+	int ind = 0;
+	int* run = src;
+	while (++count_compare && run < src + n) {
+		int len = bucket[ind];
+		selectionSort_count(run, len, count_compare);
+		run += bucket[ind++];
+	}
+
+	delete[]pos;
+	delete[]dst;
+	delete[]bucket;
 }
