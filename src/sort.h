@@ -3,9 +3,6 @@
 #include <time.h>
 using namespace std;
 
-/*runtime*/
-int maxVal(int* start, int* end);
-int minVal(int* start, int* end);
 
 //selection sort
 void selectionSort(int* src, int n);
@@ -13,7 +10,7 @@ void selectionSort(int* src, int n);
 //insertion sort
 void insertionSort(int* src, int n);
 
-
+//bubble sort
 void bubbleSort(int* src, int n);
 
 //heap sort
@@ -46,6 +43,11 @@ void countingSort(int* src, int n);
 
 //flash sort
 void flashSort(int* src, int n);
+
+/* runtime for counting/flash sort */
+int maxVal(int* start, int* end);
+int minVal(int* start, int* end);
+
 
 /*-----------------------------------------------------------*/
 

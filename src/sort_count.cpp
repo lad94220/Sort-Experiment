@@ -25,6 +25,7 @@ void selectionSort_count(int* src, int n, unsigned int& count_compare) {
     }
 }
 
+
 // insertion sort
 void insertionSort_count(int* src, int n, unsigned int& count_compare) {
 	for (int i = 1; ++count_compare && i < n; ++i) {
@@ -38,6 +39,7 @@ void insertionSort_count(int* src, int n, unsigned int& count_compare) {
 	}
 }
 
+
 // bubble sort
 void bubbleSort_count(int* src, int n, unsigned int& count_compare) {
 	for (int i = 0; ++count_compare && i < n; ++i) {
@@ -46,6 +48,7 @@ void bubbleSort_count(int* src, int n, unsigned int& count_compare) {
 		}
 	}
 }
+
 
 // heap sort
 void minHeapRebuild_count(int* src, int n, int pos, unsigned int& count_compare) {
@@ -121,6 +124,7 @@ void mergeArrays_count(int* src, int start, int mid, int end, unsigned int& coun
 	delete src_right;
 }
 
+
 //quick sort
 void quickSort_count(int* src, int n, unsigned int& count_compare) {
 	quickSortHelper_count(src, 0, n - 1, count_compare);
@@ -189,6 +193,7 @@ void shakerSort_count(int* src, int n, unsigned int& count_compare) {
 	}
 }
 
+
 // shell sort
 void shellSort_count(int* src, int n, unsigned int& count_compare) {
 	for (int gap = n/2;++count_compare && gap >= 1; gap /= 2) {
@@ -203,6 +208,7 @@ void shellSort_count(int* src, int n, unsigned int& count_compare) {
 		}
 	}
 }
+
 
 //counting sort
 void countingSort_count(int* src, int n, unsigned int& count_compare) {
@@ -222,6 +228,7 @@ void countingSort_count(int* src, int n, unsigned int& count_compare) {
 	delete[]dst;
 	delete[]pos;
 }
+
 
 //flash sort
 void flashSort_count(int* src, int n, unsigned int& count_compare) {
@@ -253,4 +260,18 @@ void flashSort_count(int* src, int n, unsigned int& count_compare) {
 	delete[]pos;
 	delete[]dst;
 	delete[]bucket;
+}
+
+//subroutines for counting/flash sort
+int maxVal_count(int* start, int* end, long long& count_compare) {
+	int mx = *start;
+	for (int* run = start; ++count_compare && run < end; run++)
+		if (++count_compare && *run > mx) mx = *run;
+	return mx;
+}
+int minVal_count(int* start, int* end, long long& count_compare) {
+	int mn = *start;
+	for (int* run = start; ++count_compare && run < end; run++)
+		if (++count_compare && *run < mn) mn = *run;
+	return mn;
 }
