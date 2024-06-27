@@ -55,7 +55,7 @@ size_t count_comparisons(int* array, int n, string algro) {
     if (algro == "shaker-sort") shakerSort_count(array, n, count_compare);
     if (algro == "shell-sort") shellSort_count(array, n, count_compare);
     if (algro == "counting-sort") countingSort_count(array, n, count_compare);
-    //if (algro == "flash-sort"); flashSort_count(array, n, count_compare);
+    if (algro == "flash-sort") flashSort_count(array, n, count_compare);
     return count_compare;
 }
 
