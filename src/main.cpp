@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
                 int* array1 = new int[n];
                 for (int i = 0; i < n; i++) array1[i] = array[i];
 
-                int count_compare = count_comparisons(array, n, argv[2]);
+                size_t count_compare = count_comparisons(array, n, argv[2]);
                 double run_time = runtime(array1, n, argv[2]);
 
                 //write sorted array
@@ -176,7 +176,7 @@ int main(int argc, char** argv) {
             //write generated array
             writeFile(input, array, n);
 
-            unsigned int count_compare = count_comparisons(array1, n, argv[2]);
+            size_t count_compare = count_comparisons(array1, n, argv[2]);
             double run_time = runtime(array, n, argv[2]);
 
             //write sorted array
