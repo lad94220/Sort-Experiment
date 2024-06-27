@@ -60,19 +60,81 @@ long long count_comparisons(int* array, int n, string algro) {
 }
 
 double runtime(int* array, int n, string algro) {
-    clock_t start, end;
-    double duration;
-    if (algro == "selection-sort") {start = clock(); selectionSort(array, n); end = clock();}
-    if (algro == "insertion-sort") {start = clock(); insertionSort(array, n); end = clock();}
-    if (algro == "bubble-sort") {start = clock(); bubbleSort(array, n); end = clock();}
-    if (algro == "heap-sort") {start = clock(); heapSort(array, n); end = clock();}
-    if (algro == "merge-sort") {start = clock(); mergeSort(array, n); end = clock();}
-    if (algro == "quick-sort") {start = clock(); quickSort(array, n); end = clock();}
-    if (algro == "radix-sort") {start = clock(); radixSort(array, n); end = clock();}
-    if (algro == "shaker-sort") {start = clock(); shakerSort(array, n); end = clock();}
-    if (algro == "shell-sort") {start = clock(); shellSort(array, n); end = clock();}
-    if (algro == "counting-sort") {start = clock(); countingSort(array, n); end = clock();}
-    if (algro == "flash-sort"); {start = clock(); flashSort(array, n); end = clock();}
-    duration = (double)(end - start) / CLOCKS_PER_SEC * 1000.0;
-    return duration;
+    if (algro == "selection-sort") {
+        auto start = std::chrono::high_resolution_clock::now();
+        selectionSort(array, n);
+        auto end = std::chrono::high_resolution_clock::now();
+        double duration = duration_cast<milliseconds>(end - start).count();
+        return duration;
+    }
+    if (algro == "insertion-sort") {
+        auto start = std::chrono::high_resolution_clock::now();
+        insertionSort(array, n);
+        auto end = std::chrono::high_resolution_clock::now();
+        double duration = duration_cast<milliseconds>(end - start).count();
+        return duration;
+    }
+    if (algro == "bubble-sort") {
+        auto start = std::chrono::high_resolution_clock::now();
+        bubbleSort(array, n);
+        auto end = std::chrono::high_resolution_clock::now();
+        double duration = duration_cast<milliseconds>(end - start).count();
+        return duration;
+        }
+    if (algro == "heap-sort") {
+        auto start = std::chrono::high_resolution_clock::now();
+        heapSort(array, n);
+        auto end = std::chrono::high_resolution_clock::now();
+        double duration = duration_cast<milliseconds>(end - start).count();
+        return duration;
+        }
+    if (algro == "merge-sort") {
+        auto start = std::chrono::high_resolution_clock::now();
+        mergeSort(array, n);
+        auto end = std::chrono::high_resolution_clock::now();
+        double duration = duration_cast<milliseconds>(end - start).count();
+        return duration;
+    }
+    if (algro == "quick-sort") {
+        auto start = std::chrono::high_resolution_clock::now();
+        quickSort(array, n);
+        auto end = std::chrono::high_resolution_clock::now();
+        double duration = duration_cast<milliseconds>(end - start).count();
+        return duration;
+    }
+    if (algro == "radix-sort") {
+        auto start = std::chrono::high_resolution_clock::now();
+        radixSort(array, n);
+        auto end = std::chrono::high_resolution_clock::now();
+        double duration = duration_cast<milliseconds>(end - start).count();
+        return duration;
+    }
+    if (algro == "shaker-sort") {
+        auto start = std::chrono::high_resolution_clock::now();
+        shakerSort(array, n);
+        auto end = std::chrono::high_resolution_clock::now();
+        double duration = duration_cast<milliseconds>(end - start).count();
+        return duration;
+    }
+    if (algro == "shell-sort") {
+        auto start = std::chrono::high_resolution_clock::now();
+        shellSort(array, n);
+        auto end = std::chrono::high_resolution_clock::now();
+        double duration = duration_cast<milliseconds>(end - start).count();
+        return duration;
+    }
+    if (algro == "counting-sort") {
+        auto start = std::chrono::high_resolution_clock::now();
+        countingSort(array, n);
+        auto end = std::chrono::high_resolution_clock::now();
+        double duration = duration_cast<milliseconds>(end - start).count();
+        return duration;
+    }
+    if (algro == "flash-sort"); {
+        auto start = std::chrono::high_resolution_clock::now();
+        flashSort(array, n);
+        auto end = std::chrono::high_resolution_clock::now();
+        double duration = duration_cast<milliseconds>(end - start).count();
+        return duration;
+    }
 }
