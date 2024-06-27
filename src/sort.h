@@ -33,6 +33,7 @@ int partitionForQuickSort(int* src, int left, int right);
 void digitSort(int* src, int n, int exp);
 void radixSort(int* src, int n);
 
+//shaker sort
 void shakerSort(int* src, int n);
 
 //shell sort
