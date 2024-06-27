@@ -1,3 +1,7 @@
+#ifndef COMMAND_H
+#define COMMAND_H
+
+
 #include <iostream>
 #include <string.h>
 #include <time.h>
@@ -19,3 +23,6 @@ int* readFile(char* file_name, int& n);
 void writeFile(char* file_name, int* array, int n);
 long long count_comparisons(int* array, int n, string algro);
 double runtime(int* array, int n, string algro);
+
+
+#endif
