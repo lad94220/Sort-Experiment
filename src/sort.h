@@ -8,9 +8,6 @@
 #include <time.h>
 using namespace std;
 
-/*runtime*/
-int maxVal(int* start, int* end);
-int minVal(int* start, int* end);
 
 //selection sort
 void selectionSort(int* src, int n);
@@ -18,7 +15,7 @@ void selectionSort(int* src, int n);
 //insertion sort
 void insertionSort(int* src, int n);
 
-
+//bubble sort
 void bubbleSort(int* src, int n);
 
 //heap sort
@@ -52,11 +49,13 @@ void countingSort(int* src, int n);
 //flash sort
 void flashSort(int* src, int n);
 
+/* runtime for counting/flash sort */
+int maxVal(int* start, int* end);
+int minVal(int* start, int* end);
+
+
 /*-----------------------------------------------------------*/
 
-/*count experiments*/
-int maxVal_count(int* start, int* end, long long& count_compare);
-int minVal_count(int* start, int* end, long long& count_compare);
 
 //selection sort
 void selectionSort_count(int* src, int n, long long& count_compare);
@@ -64,7 +63,7 @@ void selectionSort_count(int* src, int n, long long& count_compare);
 //insertion sort
 void insertionSort_count(int* src, int n, long long& count_compare);
 
-
+//bubble sort
 void bubbleSort_count(int* src, int n, long long& count_compare);
 
 //heap sort
@@ -72,12 +71,10 @@ void minHeapRebuild_count(int* src, int n, int pos, long long& count_compare);
 void minHeapBuild_count(int* src, int n, long long& count_compare);
 void heapSort_count(int* src, int n, long long& count_compare);
 
-
 //merge sort
 void mergeSort_count(int* src, int n, long long& count_compare);
 void mergeSortHelper_count(int* src, int start, int end, long long& count_compare);
 void mergeArrays_count(int* src, int start, int mid, int end, long long& count_compare);
-
 
 //quick sort
 void quickSort_count(int* src, int n, long long& count_compare);
@@ -88,6 +85,7 @@ int partitionForQuickSort_count(int* src, int left, int right, long long& count_
 void digitSort_count(int* src, int n, int exp, long long& count_compare);
 void radixSort_count(int* src, int n, long long& count_compare);
 
+//shaker sort
 void shakerSort_count(int* src, int n, long long& count_compare);
 
 //shell sort
@@ -98,6 +96,11 @@ void countingSort_count(int* src, int n, long long& count_compare);
 
 //flash sort
 void flashSort_count(int* src, int n, long long& count_compare);
+
+
+/* count experiments for counting/flash sort */
+int maxVal_count(int* start, int* end, long long& count_compare);
+int minVal_count(int* start, int* end, long long& count_compare);
 
 
 #endif

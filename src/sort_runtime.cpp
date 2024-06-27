@@ -1,18 +1,6 @@
 #include "sort.h"
 
-int maxVal(int* start, int* end) {
-	int mx = *start;
-	for (int* run = start; run < end; run++)
-		if (*run > mx) mx = *run;
-	return mx;
-}
 
-int minVal(int* start, int* end) {
-	int mn = *start;
-	for (int* run = start; run < end; run++)
-		if (*run < mn) mn = *run;
-	return mn;
-}
 
 // selection sort
 void selectionSort(int* src, int n) {
@@ -24,6 +12,7 @@ void selectionSort(int* src, int n) {
 		if (mind_idex != i) swap(src[mind_idex], src[i]);
     }
 }
+
 
 // insertion sort
 void insertionSort(int* src, int n) {
@@ -38,6 +27,8 @@ void insertionSort(int* src, int n) {
 	}
 }
 
+
+//bubble sort
 void bubbleSort(int* src, int n)
 {
 	for (int i = 0; i < n; ++i) {
@@ -49,6 +40,16 @@ void bubbleSort(int* src, int n)
 }
 
 
+//heap sort
+void heapSort(int* src, int n) {
+	int m = n;
+	for (int* tmp = src; tmp < src + n; tmp++)
+		minHeapBuild(tmp, m--);
+}
+void minHeapBuild(int* src, int n) {
+	for (int i = (n - 2) / 2; i >= 0; i--)
+		minHeapRebuild(src, n, i);
+}
 void minHeapRebuild(int* src, int n, int pos) {
 	int _pos = pos;
 
@@ -64,16 +65,6 @@ void minHeapRebuild(int* src, int n, int pos) {
 		else break;
 	}
 }
-void minHeapBuild(int* src, int n) {
-	for (int i = (n - 2) / 2; i >= 0; i--)
-		minHeapRebuild(src, n, i);
-}
-void heapSort(int* src, int n) {
-	int m = n;
-	for (int* tmp = src; tmp < src + n; tmp++)
-		minHeapBuild(tmp, m--);
-}
-
 
 
 // merge sort
@@ -155,6 +146,12 @@ int partitionForQuickSort(int* src, int left, int right) {
 }
 
 
+//radix sort
+void radixSort(int* src, int n) {
+	int mx = maxVal(src, src + n);
+	for (int exp = 1; mx / exp > 0; exp *= 10)
+		digitSort(src, n, exp);
+}
 void digitSort(int* src, int n, int exp) {
 	int* pos = new int[10]();
 	int* dst = new int[n];
@@ -171,12 +168,9 @@ void digitSort(int* src, int n, int exp) {
 	delete[]dst;
 	delete[]pos;
 }
-void radixSort(int* src, int n) {
-	int mx = maxVal(src, src + n);
-	for (int exp = 1; mx / exp > 0; exp *= 10)
-		digitSort(src, n, exp);
-}
 
+
+//shaker sort
 void shakerSort(int* src, int n)
 {
 	int left = 0, right = n - 1;
@@ -199,6 +193,7 @@ void shakerSort(int* src, int n)
 	}
 }
 
+
 // shell sort
 void shellSort(int* src, int n) {
 	for (int gap = n/2; gap >= 1; gap /= 2) {
@@ -213,6 +208,7 @@ void shellSort(int* src, int n) {
 		}
 	}
 }
+
 
 //counting sort
 void countingSort(int* src, int n) {
@@ -232,6 +228,7 @@ void countingSort(int* src, int n) {
 	delete[]dst;
 	delete[]pos;
 }
+
 
 //flash sort
 void flashSort(int* src, int n) {
@@ -263,4 +260,18 @@ void flashSort(int* src, int n) {
 	delete[]pos;
 	delete[]dst;
 	delete[]bucket;
+}
+
+//subroutines for counting/flash sort
+int maxVal(int* start, int* end) {
+	int mx = *start;
+	for (int* run = start; run < end; run++)
+		if (*run > mx) mx = *run;
+	return mx;
+}
+int minVal(int* start, int* end) {
+	int mn = *start;
+	for (int* run = start; run < end; run++)
+		if (*run < mn) mn = *run;
+	return mn;
 }
