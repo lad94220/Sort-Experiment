@@ -1,7 +1,6 @@
 #include "sort.h"
 
 
-
 // selection sort
 void selectionSort(int* src, int n) {
     for (int i = 0; i < n; ++i) {

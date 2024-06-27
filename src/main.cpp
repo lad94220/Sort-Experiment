@@ -12,7 +12,7 @@ int main(int argc, char** argv) {
                 int* array1 = new int[n];
                 for (int i = 0; i < n; i++) array1[i] = array[i];
 
-                long long count_compare = count_comparisons(array, n, argv[2]);
+                int count_compare = count_comparisons(array, n, argv[2]);
                 double run_time = runtime(array1, n, argv[2]);
 
                 //write sorted array
@@ -163,7 +163,7 @@ int main(int argc, char** argv) {
             //write generated array
             writeFile("input.txt", array, n);
 
-            long long count_compare = count_comparisons(array1, n, argv[2]);
+            unsigned int count_compare = count_comparisons(array1, n, argv[2]);
             double run_time = runtime(array, n, argv[2]);
 
             //write sorted array
