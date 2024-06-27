@@ -97,8 +97,10 @@ void countingSort_count(int* src, int n, long long& count_compare);
 //flash sort
 void flashSort_count(int* src, int n, long long& count_compare);
 
+
 /* count experiments for counting/flash sort */
 int maxVal_count(int* start, int* end, long long& count_compare);
 int minVal_count(int* start, int* end, long long& count_compare);
+
 
 #endif
