@@ -2,6 +2,19 @@
 #include "sort.h"
 
 int main(int argc, char** argv) {
+    char* input = new char[strlen("input.txt") + 1];
+    strcpy(input, "input.txt");
+    char* input1 = new char[strlen("input1.txt") + 1];
+    strcpy(input1, "input1.txt");
+    char* input2 = new char[strlen("input2.txt") + 1];
+    strcpy(input2, "input2.txt");
+    char* input3 = new char[strlen("input3.txt") + 1];
+    strcpy(input3, "input3.txt");
+    char* input4 = new char[strlen("input4.txt") + 1];
+    strcpy(input4, "input4.txt");
+    char* output = new char[strlen("output.txt") + 1];
+    strcpy(output, "output.txt");
+
     if (strcmp(argv[1], "-a") == 0) { //command 1,2,3
         string output_para;
         if (argc == 5) {
@@ -16,7 +29,7 @@ int main(int argc, char** argv) {
                 double run_time = runtime(array1, n, argv[2]);
 
                 //write sorted array
-                writeFile("output.txt", array, n);
+                writeFile(input, array, n);
 
                 //console output
                 cout << "ALGORITHM MODE\n";
@@ -59,7 +72,7 @@ int main(int argc, char** argv) {
                 for (int i = 0; i < n; i++) array1[i] = array[i];
 
                 //write randomized data
-                writeFile("input_1.txt", array, n);
+                writeFile(input1, array, n);
 
                 if (output_para == "-both") {
                     cout << "Running time (if required): " << runtime(array, n, argv[2]) << endl;
@@ -81,7 +94,7 @@ int main(int argc, char** argv) {
                 for (int i = 0; i < n; i++) array1[i] = array[i];
 
                 //write nearly sorted data
-                writeFile("input_2.txt", array, n);
+                writeFile(input2, array, n);
 
                 if (output_para == "-both") {
                     cout << "Running time (if required): " << runtime(array, n, argv[2]) << endl;
@@ -103,7 +116,7 @@ int main(int argc, char** argv) {
                 for (int i = 0; i < n; i++) array1[i] = array[i];
 
                 //write sortd data
-                writeFile("input_3.txt", array, n);
+                writeFile(input3, array, n);
 
                 if (output_para == "-both") {
                     cout << "Running time (if required): " << runtime(array, n, argv[2]) << endl;
@@ -125,7 +138,7 @@ int main(int argc, char** argv) {
                 for (int i = 0; i < n; i++) array1[i] = array[i];
 
                 //write reversed data
-                writeFile("input_4.txt", array, n);
+                writeFile(input4, array, n);
                 
                 if (output_para == "-both") {
                     cout << "Running time (if required): " << runtime(array, n, argv[2]) << endl;
@@ -161,13 +174,13 @@ int main(int argc, char** argv) {
             for (int i = 0; i < n; i++) array1[i] = array[i];
 
             //write generated array
-            writeFile("input.txt", array, n);
+            writeFile(input, array, n);
 
             unsigned int count_compare = count_comparisons(array1, n, argv[2]);
             double run_time = runtime(array, n, argv[2]);
 
             //write sorted array
-            writeFile("output.txt", array, n);
+            writeFile(output, array, n);
 
             //console output
             cout << "ALGORITHM MODE\n";
@@ -240,7 +253,7 @@ int main(int argc, char** argv) {
             for (int i = 0; i < n; i++) array3[i] = array[i];
 
             //write generated array
-            writeFile("input.txt", array, n);
+            writeFile(input, array, n);
 
             //console output
             cout << "COMPARE MODE\n";
