@@ -1,3 +1,8 @@
+#ifndef SORT_H
+#define SORT_H
+
+
+
 #include <iostream>
 #include <algorithm>
 #include <time.h>
@@ -93,3 +98,6 @@ void countingSort_count(int* src, int n, long long& count_compare);
 
 //flash sort
 void flashSort_count(int* src, int n, long long& count_compare);
+
+
+#endif
