@@ -1,18 +1,6 @@
 #include "sort.h"
 
-int maxVal_count(int* start, int* end, long long& count_compare) {
-	int mx = *start;
-	for (int* run = start; ++count_compare && run < end; run++)
-		if (++count_compare && *run > mx) mx = *run;
-	return mx;
-}
 
-int minVal_count(int* start, int* end, long long& count_compare) {
-	int mn = *start;
-	for (int* run = start; ++count_compare && run < end; run++)
-		if (++count_compare && *run < mn) mn = *run;
-	return mn;
-}
 
 // selection sort
 void selectionSort_count(int* src, int n, long long& count_compare) {
@@ -24,6 +12,7 @@ void selectionSort_count(int* src, int n, long long& count_compare) {
 		if (++count_compare && mind_idex != i) swap(src[mind_idex], src[i]);
     }
 }
+
 
 // insertion sort
 void insertionSort_count(int* src, int n, long long& count_compare) {
@@ -38,6 +27,7 @@ void insertionSort_count(int* src, int n, long long& count_compare) {
 	}
 }
 
+
 // bubble sort
 void bubbleSort_count(int* src, int n, long long& count_compare) {
 	for (int i = 0; ++count_compare && i < n; ++i) {
@@ -46,6 +36,7 @@ void bubbleSort_count(int* src, int n, long long& count_compare) {
 		}
 	}
 }
+
 
 // heap sort
 void minHeapRebuild_count(int* src, int n, int pos, long long& count_compare) {
@@ -121,6 +112,7 @@ void mergeArrays_count(int* src, int start, int mid, int end, long long& count_c
 	delete src_right;
 }
 
+
 //quick sort
 void quickSort_count(int* src, int n, long long& count_compare) {
 	quickSortHelper_count(src, 0, n - 1, count_compare);
@@ -152,6 +144,11 @@ int partitionForQuickSort_count(int* src, int left, int right, long long& count_
 
 
 // radix sort
+void radixSort_count(int* src, int n, long long& count_compare) {
+	int mx = maxVal_count(src, src + n, count_compare);
+	for (int exp = 1; ++count_compare && mx / exp > 0; exp *= 10)
+		digitSort_count(src, n, exp, count_compare);
+}
 void digitSort_count(int* src, int n, int exp, long long& count_compare) {
 	int* pos = new int[10]();
 	int* dst = new int[n];
@@ -168,11 +165,7 @@ void digitSort_count(int* src, int n, int exp, long long& count_compare) {
 	delete[]dst;
 	delete[]pos;
 }
-void radixSort_count(int* src, int n, long long& count_compare) {
-	int mx = maxVal_count(src, src + n, count_compare);
-	for (int exp = 1; ++count_compare && mx / exp > 0; exp *= 10)
-		digitSort_count(src, n, exp, count_compare);
-}
+
 
 // shaker sort
 void shakerSort_count(int* src, int n, long long& count_compare) {
@@ -189,6 +182,7 @@ void shakerSort_count(int* src, int n, long long& count_compare) {
 	}
 }
 
+
 // shell sort
 void shellSort_count(int* src, int n, long long& count_compare) {
 	for (int gap = n/2;++count_compare && gap >= 1; gap /= 2) {
@@ -203,6 +197,7 @@ void shellSort_count(int* src, int n, long long& count_compare) {
 		}
 	}
 }
+
 
 //counting sort
 void countingSort_count(int* src, int n, long long& count_compare) {
@@ -222,6 +217,7 @@ void countingSort_count(int* src, int n, long long& count_compare) {
 	delete[]dst;
 	delete[]pos;
 }
+
 
 //flash sort
 void flashSort_count(int* src, int n, long long& count_compare) {
@@ -253,4 +249,18 @@ void flashSort_count(int* src, int n, long long& count_compare) {
 	delete[]pos;
 	delete[]dst;
 	delete[]bucket;
+}
+
+//subroutines for counting/flash sort
+int maxVal_count(int* start, int* end, long long& count_compare) {
+	int mx = *start;
+	for (int* run = start; ++count_compare && run < end; run++)
+		if (++count_compare && *run > mx) mx = *run;
+	return mx;
+}
+int minVal_count(int* start, int* end, long long& count_compare) {
+	int mn = *start;
+	for (int* run = start; ++count_compare && run < end; run++)
+		if (++count_compare && *run < mn) mn = *run;
+	return mn;
 }
