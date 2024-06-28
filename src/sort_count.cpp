@@ -38,31 +38,31 @@ void bubbleSort_count(int* src, int n, size_t& count_compare) {
 
 
 // heap sort
-void minHeapRebuild_count(int* src, int n, int pos, size_t& count_compare) {
+void heapSort_count(int* src, int n, size_t& count_compare) {
+	maxHeapBuild_count(src, n, count_compare);
+	for (int i = n - 1; ++count_compare && i > 0; i--) {
+		swap(src[0], src[i]);
+		maxHeapRebuild_count(src, i, 0, count_compare);
+	}
+}
+void maxHeapRebuild_count(int* src, int n, int pos, size_t& count_compare) {
 	int _pos = pos;
 
 	while (++count_compare && 2 * _pos + 1 < n) {
 		int child = 2 * _pos + 1;
-
 		if (++count_compare && child < n - 1)
-			if (++count_compare && src[child] > src[child + 1]) child += 1;
-		if (++count_compare && src[_pos] > src[child]) {
+			if (++count_compare && src[child] < src[child + 1]) child++;
+		if (++count_compare && src[_pos] < src[child]) {
 			swap(src[_pos], src[child]);
 			_pos = child;
 		}
 		else break;
 	}
 }
-void minHeapBuild_count(int* src, int n, size_t& count_compare) {
+void maxHeapBuild_count(int* src, int n, size_t& count_compare) {
 	for (int i = (n - 2) / 2; ++count_compare && i >= 0; i--)
-		minHeapRebuild_count(src, n, i, count_compare);
+		maxHeapRebuild_count(src, n, i, count_compare);
 }
-void heapSort_count(int* src, int n, size_t& count_compare) {
-	int m = n;
-	for (int* tmp = src; ++count_compare && tmp < src + n; tmp++)
-		minHeapBuild_count(tmp, m--, count_compare);
-}
-
 
 // merge sort
 void mergeSort_count(int* src, int n, size_t& count_compare) {

@@ -41,30 +41,30 @@ void bubbleSort(int* src, int n)
 
 //heap sort
 void heapSort(int* src, int n) {
-	int m = n;
-	for (int* tmp = src; tmp < src + n; tmp++)
-		minHeapBuild(tmp, m--);
+	maxHeapBuild(src, n);
+	for (int i = n - 1; && i > 0; i--) {
+		swap(src[0], src[i]);
+		maxHeapRebuild_count(src, i, 0);
+	}
 }
-void minHeapBuild(int* src, int n) {
-	for (int i = (n - 2) / 2; i >= 0; i--)
-		minHeapRebuild(src, n, i);
-}
-void minHeapRebuild(int* src, int n, int pos) {
+void maxHeapRebuild(int* src, int n, int pos) {
 	int _pos = pos;
 
 	while (2 * _pos + 1 < n) {
 		int child = 2 * _pos + 1;
-
 		if (child < n - 1)
-			if (src[child] > src[child + 1]) child += 1;
-		if (src[_pos] > src[child]) {
+			if (src[child] < src[child + 1]) child++;
+		if (src[_pos] < src[child]) {
 			swap(src[_pos], src[child]);
 			_pos = child;
 		}
 		else break;
 	}
 }
-
+void maxHeapBuild(int* src, int n) {
+	for (int i = (n - 2) / 2; i >= 0; i--)
+		maxHeapRebuild(src, n, i);
+}
 
 // merge sort
 void mergeSort(int* src, int n) {
