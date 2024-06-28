@@ -35,10 +35,17 @@ step 6: If the number of sorted part's element is not equal to the number of ele
 *Optimizations:
 
 ------------Heap Sort------------
-*Introduction:
+*Introduction: A sorting algorithm that heapifies the array to find the largest value of the unsorted part of the array (max-heap) and bring it to the end of the array.
 *Algorithm Steps:
+step 1: Construct a max-heap for the array
+	Condition: arr[i] > arr[2i + 1] and arr[i] > arr[2i + 2] (Condition does not apply to the second half as 2i+1 and 2i+2 are 	out of array)
+step 2: Swap the root (arr[0]) with the last element of the heap
+step 3: Reduce the size of the heap by 1
+step 4: If the size of the heap is greater than 0, go to step 1. Otherwise, end the process since the array is fully sorted.
 *Complexity Analysis:
-*Optimizations:
+    Best-case time complexity: O(nlog2(n))
+    Average-case time complexity: O(nlog2(n))
+    Worst-case time complexity: O(nlog2(n))
 
 ------------Merge Sort------------
 *Introduction: Merge sort is an algorithm that follows the divide-and-conquer method. Starting with the entire array A[1:n], it recurses down to smaller and smaller subarrays. The key operation of the merge sort algorithm occurs in the "combine" step, which merges two adjacent, sorted subarrays (Cormen, Leiserson, Rivest, & Stein, 2022, pp. 35-37).
