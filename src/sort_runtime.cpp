@@ -42,9 +42,9 @@ void bubbleSort(int* src, int n)
 //heap sort
 void heapSort(int* src, int n) {
 	maxHeapBuild(src, n);
-	for (int i = n - 1; && i > 0; i--) {
+	for (int i = n - 1; i > 0; i--) {
 		swap(src[0], src[i]);
-		maxHeapRebuild_count(src, i, 0);
+		maxHeapRebuild(src, i, 0);
 	}
 }
 void maxHeapRebuild(int* src, int n, int pos) {
