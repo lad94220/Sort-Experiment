@@ -1,19 +1,5 @@
 #include "sort.h"
 
-int maxVal_count(int* start, int* end, unsigned int& count_compare) {
-	int mx = *start;
-	for (int* run = start; ++count_compare && run < end; run++)
-		if (++count_compare && *run > mx) mx = *run;
-	return mx;
-}
-
-int minVal_count(int* start, int* end, unsigned int& count_compare) {
-	int mn = *start;
-	for (int* run = start; ++count_compare && run < end; run++)
-		if (++count_compare && *run < mn) mn = *run;
-	return mn;
-}
-
 // selection sort
 void selectionSort_count(int* src, int n, unsigned int& count_compare) {
     for (int i = 0; ++count_compare && i < n; ++i) {
@@ -24,7 +10,6 @@ void selectionSort_count(int* src, int n, unsigned int& count_compare) {
 		if (++count_compare && mind_idex != i) swap(src[mind_idex], src[i]);
     }
 }
-
 
 // insertion sort
 void insertionSort_count(int* src, int n, unsigned int& count_compare) {
@@ -263,13 +248,13 @@ void flashSort_count(int* src, int n, unsigned int& count_compare) {
 }
 
 //subroutines for counting/flash sort
-int maxVal_count(int* start, int* end, long long& count_compare) {
+int maxVal_count(int* start, int* end, unsigned int& count_compare) {
 	int mx = *start;
 	for (int* run = start; ++count_compare && run < end; run++)
 		if (++count_compare && *run > mx) mx = *run;
 	return mx;
 }
-int minVal_count(int* start, int* end, long long& count_compare) {
+int minVal_count(int* start, int* end, unsigned int& count_compare) {
 	int mn = *start;
 	for (int* run = start; ++count_compare && run < end; run++)
 		if (++count_compare && *run < mn) mn = *run;

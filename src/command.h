@@ -19,3 +19,4 @@ int* readFile(char* file_name, int& n);
 void writeFile(char* file_name, int* array, int n);
 unsigned int count_comparisons(int* array, int n, string algro);
 double runtime(int* array, int n, string algro);
+void cmd(int argc, char** argv);
