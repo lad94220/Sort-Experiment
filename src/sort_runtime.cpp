@@ -247,27 +247,17 @@ void flashSort(int* src, int n) {
 	for (int i = 1; i < bucketNum; i++)
 		pos[i] += pos[i - 1];
 
-	swap(src[mxInd], src[0]);
-	int nmove = 0;
-	int j = 0;
-	int k = bucketNum - 1;
-	int t = 0;
-	while (nmove < n - 1)
-	{
-		while (j > pos[k] - 1)
-		{
-			j++;
-			k = c * (src[j] - Mn);
-		}
-		int tmp = src[j];
-		if (k < 0) break;
-		while (j != pos[k])
-		{
+	int count = 0;
+	int i = 0;
+	while (count < n) {
+		int k = c * (src[i] - Mn);
+		while (i >= pos[k])
+			k = c * (src[++i] - Mn);
+		int tmp = src[i];
+		while (i != pos[k]) {
 			k = c * (tmp - Mn);
-			int hold = src[t = --pos[k]];
-			src[t] = tmp;
-			tmp = hold;
-			++nmove;
+			swap(tmp, src[--pos[k]]);
+			++count;
 		}
 	}
 
