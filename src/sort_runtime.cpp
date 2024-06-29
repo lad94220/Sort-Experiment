@@ -1,4 +1,4 @@
-#include "sort.h"
+#include "sort_runtime.h"
 
 
 // selection sort
@@ -42,9 +42,9 @@ void bubbleSort(int* src, int n)
 //heap sort
 void heapSort(int* src, int n) {
 	maxHeapBuild(src, n);
-	for (int i = n - 1; && i > 0; i--) {
+	for (int i = n - 1; i > 0; i--) {
 		swap(src[0], src[i]);
-		maxHeapRebuild_count(src, i, 0);
+		maxHeapRebuild(src, i, 0);
 	}
 }
 void maxHeapRebuild(int* src, int n, int pos) {
@@ -231,34 +231,48 @@ void countingSort(int* src, int n) {
 
 //flash sort
 void flashSort(int* src, int n) {
-	int mx = maxVal(src, src + n);
-	int mn = minVal(src, src + n);
+	int mx = *src, mn = *src;
+	for (int* run = src; run < src + n; run++) {
+		if (*run > mx) mx = *run;
+		if (*run < mn) mn = *run;
+	}
+
+	if (mx == mn) return;
 
 	int bucketNum = (int)(0.45 * n);
-	int* bucket = new int[bucketNum]();
-	int* dst = new int[n];
-	int* pos = new int[bucketNum];
+#define getK(x) (int)(bucketNum - 1) * (x - mn) / (mx - mn)
+
+	int* pos = new int[bucketNum]();
 
 	for (int i = 0; i < n; i++)
-		bucket[(bucketNum - 1) * (src[i] - mn) / (mx - mn)]++;
-	pos[0] = bucket[0];
+		pos[getK(src[i])]++;
 	for (int i = 1; i < bucketNum; i++)
-		pos[i] = bucket[i] + pos[i - 1];
-	for (int i = n - 1; i >= 0; i--)
-		dst[--pos[(bucketNum - 1) * (src[i] - mn) / (mx - mn)]] = src[i];
-	for (int i = 0; i < n; i++)
-		src[i] = dst[i];
-	int ind = 0;
-	int* run = src;
-	while (run < src + n) {
-		int len = bucket[ind];
-		selectionSort(run, len);
-		run += bucket[ind++];
+		pos[i] += pos[i - 1];
+
+	int count = 0;
+	int i = 0;
+	while (count < n) {
+		int k = getK(src[i]);
+		while (i >= pos[k])
+			k = getK(src[++i]);
+		int tmp = src[i];
+		while (i != pos[k]) {
+			k = getK(tmp);
+			swap(tmp, src[--pos[k]]);
+			count++;
+		}
+	}
+
+	for (int k = 1; k < bucketNum; ++k) {
+		for (int i = pos[k] - 2; i >= pos[k - 1]; --i)
+			if (src[i] > src[i + 1]) {
+				int t = src[i], j = i;
+				while (t > src[j + 1]) { src[j] = src[j + 1]; ++j; }
+				src[j] = t;
+			}
 	}
 
 	delete[]pos;
-	delete[]dst;
-	delete[]bucket;
 }
 
 //subroutines for counting/flash sort

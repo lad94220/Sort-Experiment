@@ -1,5 +1,4 @@
-#include "sort.h"
-
+#include "sort_count.h"
 
 // selection sort
 void selectionSort_count(int* src, int n, size_t& count_compare) {
@@ -11,7 +10,6 @@ void selectionSort_count(int* src, int n, size_t& count_compare) {
 		if (++count_compare && mind_idex != i) swap(src[mind_idex], src[i]);
     }
 }
-
 
 // insertion sort
 void insertionSort_count(int* src, int n, size_t& count_compare) {
@@ -218,45 +216,59 @@ void countingSort_count(int* src, int n, size_t& count_compare) {
 
 
 //flash sort
-void flashSort_count(int* src, int n, size_t& count_compare) {
-	int mx = maxVal_count(src, src + n, count_compare);
-	int mn = minVal_count(src, src + n, count_compare);
+void flashSort_count(int* src, int n, int& count_compare) {
+	int mx = *src, mn = *src;
+	for (int* run = src; ++count_compare && run < src + n; run++) {
+		if (++count_compare && *run > mx) mx = *run;
+		if (++count_compare && *run < mn) mn = *run;
+	}
+
+	if (mx == mn) return;
 
 	int bucketNum = (int)(0.45 * n);
-	int* bucket = new int[bucketNum]();
-	int* dst = new int[n];
-	int* pos = new int[bucketNum];
+#define getK(x) (int)(bucketNum - 1) * (x - mn) / (mx - mn)
+
+	int* pos = new int[bucketNum]();
 
 	for (int i = 0; ++count_compare && i < n; i++)
-		bucket[(bucketNum - 1) * (src[i] - mn) / (mx - mn)]++;
-	pos[0] = bucket[0];
+		pos[getK(src[i])]++;
 	for (int i = 1; ++count_compare && i < bucketNum; i++)
-		pos[i] = bucket[i] + pos[i - 1];
-	for (int i = n - 1; ++count_compare && i >= 0; i--)
-		dst[--pos[(bucketNum - 1) * (src[i] - mn) / (mx - mn)]] = src[i];
-	for (int i = 0; ++count_compare && i < n; i++)
-		src[i] = dst[i];
-	int ind = 0;
-	int* run = src;
-	while (++count_compare && run < src + n) {
-		int len = bucket[ind];
-		selectionSort_count(run, len, count_compare);
-		run += bucket[ind++];
+		pos[i] += pos[i - 1];
+
+	int count = 0;
+	int i = 0;
+	while (++count_compare && count < n) {
+		int k = getK(src[i]);
+		while (++count_compare && i >= pos[k])
+			k = getK(src[++i]);
+		int tmp = src[i];
+		while (++count_compare && i != pos[k]) {
+			k = getK(tmp);
+			swap(tmp, src[--pos[k]]);
+			count++;
+		}
+	}
+
+	for (int k = 1; ++count_compare && k < bucketNum; ++k) {
+		for (int i = pos[k] - 2; ++count_compare && i >= pos[k - 1]; --i)
+			if (++count_compare && src[i] > src[i + 1]) {
+				int t = src[i], j = i;
+				while (++count_compare && t > src[j + 1]) { src[j] = src[j + 1]; ++j; }
+				src[j] = t;
+			}
 	}
 
 	delete[]pos;
-	delete[]dst;
-	delete[]bucket;
 }
 
 //subroutines for counting/flash sort
-int maxVal_count(int* start, int* end, long long& count_compare) {
+int maxVal_count(int* start, int* end, size_t& count_compare) {
 	int mx = *start;
 	for (int* run = start; ++count_compare && run < end; run++)
 		if (++count_compare && *run > mx) mx = *run;
 	return mx;
 }
-int minVal_count(int* start, int* end, long long& count_compare) {
+int minVal_count(int* start, int* end, size_t& count_compare) {
 	int mn = *start;
 	for (int* run = start; ++count_compare && run < end; run++)
 		if (++count_compare && *run < mn) mn = *run;

@@ -1,7 +1,8 @@
 #include <iostream>
 #include <string.h>
 #include <time.h>
-#include "sort.h"
+#include "sort_count.h"
+#include "sort_runtime.h"
 #include <chrono>
 #include <cstddef> //library for size_t
 using namespace std;
@@ -20,3 +21,4 @@ int* readFile(char* file_name, int& n);
 void writeFile(char* file_name, int* array, int n);
 size_t count_comparisons(int* array, int n, string algro);
 double runtime(int* array, int n, string algro);
+void cmd(int argc, char** argv);
