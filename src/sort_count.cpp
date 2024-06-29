@@ -214,105 +214,51 @@ void countingSort_count(int* src, int n, size_t& count_compare) {
 	delete[]pos;
 }
 
+void flashSort_count(int* src, int n, size_t& count_compare) {
+	int Mn = *src;
+	int mxInd = 0;
+	for (int* run = src; ++count_compare && run < src + n; run++) {
+		if (++count_compare && *run < Mn) Mn = *run;
+		if (++count_compare && *run > *(src + mxInd)) mxInd = run - src;
+	}
+	if (++count_compare && *(src + mxInd) == Mn) return;
 
-//flash sort
-// void flashSort_count(int* src, int n, size_t& count_compare) {
-// 	int mx = *src, mn = *src;
-// 	for (int* run = src; ++count_compare && run < src + n; run++) {
-// 		if (++count_compare && *run > mx) mx = *run;
-// 		if (++count_compare && *run < mn) mn = *run;
-// 	}
+	int bucketNum = int(0.45 * n);
 
-// 	if (mx == mn) return;
+	int c = (int)(bucketNum - 1) / (*(src + mxInd) - Mn);
 
-// 	int bucketNum = (int)(0.45 * n);
-// #define getK(x) (int)(bucketNum - 1) * (x - mn) / (mx - mn)
+	int* pos = new int[bucketNum]();
+	for (int i = 0; ++count_compare && i < n; i++)
+		pos[c * (src[i] - Mn)]++;
+	for (int i = 1; ++count_compare && i < bucketNum; i++)
+		pos[i] += pos[i - 1];
 
-// 	int* pos = new int[bucketNum]();
+	swap(src[mxInd], src[0]);
+	int nmove = 0;
+	int j = 0;
+	int k = bucketNum - 1;
+	int t = 0;
+	while (++count_compare && nmove < n - 1)
+	{
+		while (++count_compare && j > pos[k] - 1)
+		{
+			j++;
+			k = c * (src[j] - Mn);
+		}
+		int tmp = src[j];
+		if (++count_compare && k < 0) break;
+		while (++count_compare && j != pos[k])
+		{
+			k = c * (tmp - Mn);
+			int hold = src[t = --pos[k]];
+			src[t] = tmp;
+			tmp = hold;
+			++nmove;
+		}
+	}
 
-// 	for (int i = 0; ++count_compare && i < n; i++)
-// 		pos[getK(src[i])]++;
-// 	for (int i = 1; ++count_compare && i < bucketNum; i++)
-// 		pos[i] += pos[i - 1];
-
-// 	int count = 0;
-// 	int i = 0;
-// 	while (++count_compare && count < n) {
-// 		int k = getK(src[i]);
-// 		while (++count_compare && i >= pos[k])
-// 			k = getK(src[++i]);
-// 		int tmp = src[i];
-// 		while (++count_compare && i != pos[k]) {
-// 			k = getK(tmp);
-// 			swap(tmp, src[--pos[k]]);
-// 			count++;
-// 		}
-// 	}
-
-// 	for (int k = 1; ++count_compare && k < bucketNum; ++k) {
-// 		for (int i = pos[k] - 2; ++count_compare && i >= pos[k - 1]; --i)
-// 			if (++count_compare && src[i] > src[i + 1]) {
-// 				int t = src[i], j = i;
-// 				while (++count_compare && t > src[j + 1]) { src[j] = src[j + 1]; ++j; }
-// 				src[j] = t;
-// 			}
-// 	}
-
-// 	delete[]pos;
-// }
-
-//gpt
-
-void flashSort_count(int* arr, int n, size_t& count_compare) {
-    if (++count_compare && n <= 1) return;
-
-    // Step 1: Find minimum and maximum values in the array
-    int min_val = arr[0];
-    int max_val = arr[0];
-
-    for (int i = 1; ++count_compare && i < n; ++i) {
-        if (++count_compare && arr[i] < min_val) {
-            min_val = arr[i];
-        } else if (++count_compare &&arr[i] > max_val) {
-            max_val = arr[i];
-        }
-    }
-
-    // Determine the number of buckets
-    int k = n / 2; // Can be adjusted based on empirical data or analysis
-
-    // Step 2: Initialize and fill the buckets
-    int* bucket = new int[k](); // k buckets, initialized to 0
-    int* count = new int[k]();  // count array for buckets, initialized to 0
-
-    double interval = (double)(max_val - min_val) / k;
-
-    for (int i = 0; ++count_compare && i < n; ++i) {
-        int index = (arr[i] - min_val) / interval;
-        bucket[index]++;
-    }
-
-    // Step 3: Sort individual buckets and find the number of elements in each bucket
-    int start = 0;
-    for (int i = 0; ++count_compare && i < k; ++i) {
-        int temp = bucket[i];
-        bucket[i] = start;
-        start += temp;
-    }
-
-    // Step 4: Rearrange the elements in each bucket directly into the original array
-    int* copy = new int[n];
-    for (int i = 0; ++count_compare && i < n; ++i) {
-        int index = (arr[i] - min_val) / interval;
-        copy[i] = arr[i];
-        arr[bucket[index]] = copy[i];
-        bucket[index]++;
-    }
-
-    // Clean up allocated memory
-    delete[] bucket;
-    delete[] count;
-    delete[] copy;
+	delete[]pos;
+	insertionSort(src, n);
 }
 
 //subroutines for counting/flash sort
