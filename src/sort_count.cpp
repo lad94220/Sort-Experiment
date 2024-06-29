@@ -1,4 +1,5 @@
 #include "sort_count.h"
+#include "sort_runtime.h"
 
 // selection sort
 void selectionSort_count(int* src, int n, size_t& count_compare) {
