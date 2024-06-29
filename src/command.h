@@ -1,7 +1,8 @@
 #include <iostream>
 #include <string.h>
 #include <time.h>
-#include "sort.h"
+#include "sort_count.h"
+#include "sort_runtime.h"
 #include <chrono>
 using namespace std;
 using std::chrono::duration_cast;

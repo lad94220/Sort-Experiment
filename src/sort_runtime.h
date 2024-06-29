@@ -1,8 +1,6 @@
 #include <iostream>
 #include <algorithm>
-#include <time.h>
 using namespace std;
-
 
 //selection sort
 void selectionSort(int* src, int n);

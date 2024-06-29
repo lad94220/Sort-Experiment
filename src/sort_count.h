@@ -1,3 +1,7 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
 /*count experiments*/
 int maxVal_count(int* start, int* end, unsigned int& count_compare);
 int minVal_count(int* start, int* end, unsigned int& count_compare);
