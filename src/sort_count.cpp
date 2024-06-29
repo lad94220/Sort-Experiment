@@ -216,16 +216,16 @@ void countingSort_count(int* src, int n, size_t& count_compare) {
 
 void flashSort_count(int* src, int n, size_t& count_compare) {
 	int Mn = *src;
-	int mxInd = 0;
+	int Mx = *src;
 	for (int* run = src; ++count_compare && run < src + n; run++) {
 		if (++count_compare && *run < Mn) Mn = *run;
-		if (++count_compare && *run > *(src + mxInd)) mxInd = run - src;
+		if (++count_compare && *run > Mx) Mx = *run;
 	}
-	if (++count_compare && *(src + mxInd) == Mn) return;
+	if (++count_compare && Mx == Mn) return;
 
 	int bucketNum = int(0.45 * n);
 
-	int c = (int)(bucketNum - 1) / (*(src + mxInd) - Mn);
+	int c = (int)(bucketNum - 1) / (Mx - Mn);
 
 	int* pos = new int[bucketNum]();
 	for (int i = 0; ++count_compare && i < n; i++)

@@ -230,16 +230,16 @@ void countingSort(int* src, int n) {
 
 void flashSort(int* src, int n) {
 	int Mn = *src;
-	int mxInd = 0;
+	int Mx = *src;
 	for (int* run = src; run < src + n; run++) {
 		if (*run < Mn) Mn = *run;
-		if (*run > *(src + mxInd)) mxInd = run - src;
+		if (*run > Mx) Mx = *run;
 	}
-	if (*(src + mxInd) == Mn) return;
+	if (Mx == Mn) return;
 
 	int bucketNum = int(0.45 * n);
 
-	int c = (int)(bucketNum - 1) / (*(src + mxInd) - Mn);
+	int c = (int)(bucketNum - 1) / (Mx - Mn);
 
 	int* pos = new int[bucketNum]();
 	for (int i = 0; i < n; i++)
