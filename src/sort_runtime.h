@@ -12,8 +12,8 @@ void insertionSort(int* src, int n);
 void bubbleSort(int* src, int n);
 
 //heap sort
-void minHeapRebuild(int* src, int n, int pos);
-void minHeapBuild(int* src, int n);
+void maxHeapRebuild(int* src, int n, int pos);
+void maxHeapBuild(int* src, int n);
 void heapSort(int* src, int n);
 
 //merge sort

@@ -1,7 +1,7 @@
 #include "sort_count.h"
 
 // selection sort
-void selectionSort_count(int* src, int n, unsigned int& count_compare) {
+void selectionSort_count(int* src, int n, size_t& count_compare) {
     for (int i = 0; ++count_compare && i < n; ++i) {
 		int mind_idex = i;
         for (int j = i + 1; ++count_compare && j < n; ++j) {
@@ -12,7 +12,7 @@ void selectionSort_count(int* src, int n, unsigned int& count_compare) {
 }
 
 // insertion sort
-void insertionSort_count(int* src, int n, unsigned int& count_compare) {
+void insertionSort_count(int* src, int n, size_t& count_compare) {
 	for (int i = 1; ++count_compare && i < n; ++i) {
 		int key = src[i];
 		int j = i - 1;
@@ -26,7 +26,7 @@ void insertionSort_count(int* src, int n, unsigned int& count_compare) {
 
 
 // bubble sort
-void bubbleSort_count(int* src, int n, unsigned int& count_compare) {
+void bubbleSort_count(int* src, int n, size_t& count_compare) {
 	for (int i = 0; ++count_compare && i < n; ++i) {
 		for (int j = 0; ++count_compare && j < n - i - 1; ++j) {
 			if (++count_compare && src[j] > src[j + 1]) swap(src[j], src[j + 1]);
@@ -36,44 +36,44 @@ void bubbleSort_count(int* src, int n, unsigned int& count_compare) {
 
 
 // heap sort
-void minHeapRebuild_count(int* src, int n, int pos, unsigned int& count_compare) {
+void heapSort_count(int* src, int n, size_t& count_compare) {
+	maxHeapBuild_count(src, n, count_compare);
+	for (int i = n - 1; ++count_compare && i > 0; i--) {
+		swap(src[0], src[i]);
+		maxHeapRebuild_count(src, i, 0, count_compare);
+	}
+}
+void maxHeapRebuild_count(int* src, int n, int pos, size_t& count_compare) {
 	int _pos = pos;
 
 	while (++count_compare && 2 * _pos + 1 < n) {
 		int child = 2 * _pos + 1;
-
 		if (++count_compare && child < n - 1)
-			if (++count_compare && src[child] > src[child + 1]) child += 1;
-		if (++count_compare && src[_pos] > src[child]) {
+			if (++count_compare && src[child] < src[child + 1]) child++;
+		if (++count_compare && src[_pos] < src[child]) {
 			swap(src[_pos], src[child]);
 			_pos = child;
 		}
 		else break;
 	}
 }
-void minHeapBuild_count(int* src, int n, unsigned int& count_compare) {
+void maxHeapBuild_count(int* src, int n, size_t& count_compare) {
 	for (int i = (n - 2) / 2; ++count_compare && i >= 0; i--)
-		minHeapRebuild_count(src, n, i, count_compare);
+		maxHeapRebuild_count(src, n, i, count_compare);
 }
-void heapSort_count(int* src, int n, unsigned int& count_compare) {
-	int m = n;
-	for (int* tmp = src; ++count_compare && tmp < src + n; tmp++)
-		minHeapBuild_count(tmp, m--, count_compare);
-}
-
 
 // merge sort
-void mergeSort_count(int* src, int n, unsigned int& count_compare) {
+void mergeSort_count(int* src, int n, size_t& count_compare) {
 	mergeSortHelper_count(src, 0, n - 1, count_compare);
 }
-void mergeSortHelper_count(int* src, int start, int end, unsigned int& count_compare) {
+void mergeSortHelper_count(int* src, int start, int end, size_t& count_compare) {
 	if (++count_compare && start >= end) return;
 	int mid = (start + end) / 2;
 	mergeSortHelper_count(src, start, mid, count_compare);
 	mergeSortHelper_count(src, mid+1, end, count_compare);
 	mergeArrays_count(src, start, mid, end, count_compare);
 }
-void mergeArrays_count(int* src, int start, int mid, int end, unsigned int& count_compare) {
+void mergeArrays_count(int* src, int start, int mid, int end, size_t& count_compare) {
 	int left_size = mid - start + 1;
 	int right_size = end - mid;
 	int *src_left = new int[left_size];
@@ -111,17 +111,17 @@ void mergeArrays_count(int* src, int start, int mid, int end, unsigned int& coun
 
 
 //quick sort
-void quickSort_count(int* src, int n, unsigned int& count_compare) {
+void quickSort_count(int* src, int n, size_t& count_compare) {
 	quickSortHelper_count(src, 0, n - 1, count_compare);
 }
-void quickSortHelper_count(int* src, int left, int right, unsigned int& count_compare) {
+void quickSortHelper_count(int* src, int left, int right, size_t& count_compare) {
 	if (++count_compare && left < right) {
         int pivot_position = partitionForQuickSort_count(src, left, right, count_compare);
         quickSortHelper_count(src, left, pivot_position-1, count_compare);
         quickSortHelper_count(src, pivot_position+1, right, count_compare);
     }
 }
-int partitionForQuickSort_count(int* src, int left, int right, unsigned int& count_compare) {
+int partitionForQuickSort_count(int* src, int left, int right, size_t& count_compare) {
 	srand(time(NULL));
     int random = left + rand()%(right - left);
     swap(src[random], src[right]);
@@ -141,7 +141,7 @@ int partitionForQuickSort_count(int* src, int left, int right, unsigned int& cou
 
 
 // radix sort
-void digitSort_count(int* src, int n, int exp, unsigned int& count_compare) {
+void digitSort_count(int* src, int n, int exp, size_t& count_compare) {
 	int* pos = new int[10]();
 	int* dst = new int[n];
 
@@ -157,14 +157,14 @@ void digitSort_count(int* src, int n, int exp, unsigned int& count_compare) {
 	delete[]dst;
 	delete[]pos;
 }
-void radixSort_count(int* src, int n, unsigned int& count_compare) {
+void radixSort_count(int* src, int n, size_t& count_compare) {
 	int mx = maxVal_count(src, src + n, count_compare);
 	for (int exp = 1; ++count_compare && mx / exp > 0; exp *= 10)
 		digitSort_count(src, n, exp, count_compare);
 }
 
 // shaker sort
-void shakerSort_count(int* src, int n, unsigned int& count_compare) {
+void shakerSort_count(int* src, int n, size_t& count_compare) {
 	int left = 0, right = n - 1;
 	while (++count_compare && left < right) {
 		for (int i = left; ++count_compare && i < right; i++) {
@@ -180,7 +180,7 @@ void shakerSort_count(int* src, int n, unsigned int& count_compare) {
 
 
 // shell sort
-void shellSort_count(int* src, int n, unsigned int& count_compare) {
+void shellSort_count(int* src, int n, size_t& count_compare) {
 	for (int gap = n/2;++count_compare && gap >= 1; gap /= 2) {
 		for (int i = gap; i < n; ++i) {
 			int key = src[i];
@@ -196,7 +196,7 @@ void shellSort_count(int* src, int n, unsigned int& count_compare) {
 
 
 //counting sort
-void countingSort_count(int* src, int n, unsigned int& count_compare) {
+void countingSort_count(int* src, int n, size_t& count_compare) {
 	int mx = maxVal_count(src, src + n, count_compare);
 	int* pos = new int[mx + 1]();
 	int* dst = new int[n];
@@ -216,7 +216,7 @@ void countingSort_count(int* src, int n, unsigned int& count_compare) {
 
 
 //flash sort
-void flashSort_count(int* src, int n, unsigned int& count_compare) {
+void flashSort_count(int* src, int n, size_t& count_compare) {
 	int mx = maxVal_count(src, src + n, count_compare);
 	int mn = minVal_count(src, src + n, count_compare);
 
@@ -248,13 +248,13 @@ void flashSort_count(int* src, int n, unsigned int& count_compare) {
 }
 
 //subroutines for counting/flash sort
-int maxVal_count(int* start, int* end, unsigned int& count_compare) {
+int maxVal_count(int* start, int* end, size_t& count_compare) {
 	int mx = *start;
 	for (int* run = start; ++count_compare && run < end; run++)
 		if (++count_compare && *run > mx) mx = *run;
 	return mx;
 }
-int minVal_count(int* start, int* end, unsigned int& count_compare) {
+int minVal_count(int* start, int* end, size_t& count_compare) {
 	int mn = *start;
 	for (int* run = start; ++count_compare && run < end; run++)
 		if (++count_compare && *run < mn) mn = *run;

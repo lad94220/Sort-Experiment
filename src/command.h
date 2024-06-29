@@ -4,6 +4,7 @@
 #include "sort_count.h"
 #include "sort_runtime.h"
 #include <chrono>
+#include <cstddef> //library for size_t
 using namespace std;
 using std::chrono::duration_cast;
 using std::chrono::duration;
@@ -18,6 +19,6 @@ void GenerateData(int a[], int n, int dataType);
 int isNum(char* str);
 int* readFile(char* file_name, int& n);
 void writeFile(char* file_name, int* array, int n);
-unsigned int count_comparisons(int* array, int n, string algro);
+size_t count_comparisons(int* array, int n, string algro);
 double runtime(int* array, int n, string algro);
 void cmd(int argc, char** argv);

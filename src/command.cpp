@@ -43,8 +43,8 @@ void writeFile(char* file_name, int* array, int n) {
     fclose(f);
 }
 
-unsigned int count_comparisons(int* array, int n, string algro) {
-    unsigned int count_compare = 0;
+size_t count_comparisons(int* array, int n, string algro) {
+    size_t count_compare = 0;
     if (algro == "selection-sort") selectionSort_count(array, n, count_compare);
     if (algro == "insertion-sort") insertionSort_count(array, n, count_compare);
     if (algro == "bubble-sort") bubbleSort_count(array, n, count_compare);

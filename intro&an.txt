@@ -35,10 +35,17 @@ step 6: If the number of sorted part's element is not equal to the number of ele
 *Optimizations:
 
 ------------Heap Sort------------
-*Introduction:
+*Introduction: A sorting algorithm that heapifies the array to find the largest value of the unsorted part of the array (max-heap) and bring it to the end of the array.
 *Algorithm Steps:
+step 1: Construct a max-heap for the array
+	Condition: arr[i] > arr[2i + 1] and arr[i] > arr[2i + 2] (Condition does not apply to the second half as 2i+1 and 2i+2 are 	out of array)
+step 2: Swap the root (arr[0]) with the last element of the heap
+step 3: Reduce the size of the heap by 1
+step 4: If the size of the heap is greater than 0, go to step 1. Otherwise, end the process since the array is fully sorted.
 *Complexity Analysis:
-*Optimizations:
+    Best-case time complexity: O(nlog2(n))
+    Average-case time complexity: O(nlog2(n))
+    Worst-case time complexity: O(nlog2(n))
 
 ------------Merge Sort------------
 *Introduction: Merge sort is an algorithm that follows the divide-and-conquer method. Starting with the entire array A[1:n], it recurses down to smaller and smaller subarrays. The key operation of the merge sort algorithm occurs in the "combine" step, which merges two adjacent, sorted subarrays (Cormen, Leiserson, Rivest, & Stein, 2022, pp. 35-37).
@@ -65,7 +72,7 @@ step 4: Repeat steps 1-3 with 2 subarrays on the left/right of the pivot.
     Best-case time complexity: O(nlog(n)) - happens when we always pick the pivot to be the median of the array, then 2 subarrays will be 2 perfect halves; hence we will recurse log(n) times
     Average-case time complexity: O(nlog(n)) - depends on the chosen pivot are good or bad, but on average, a good split will eventually absorb a bad split hence the complexity will be O(nlog(n)) with some hidden contants (Cormen, Leiserson, Rivest, & Stein, 2022, pp. 191).
     Worst-case time complexity: O(n^2) - happens when we always pick the pivot to be either the smallest or the largest element in the array, then we will have to recurse n times
-*Optimizations: To avoid the worst-case scenario, we can use Tukey's ninther to approximate the median of the given array which would lead to a better pivot selection. Another method is to combine Quick Sort with another sorting algorithm, such as Insertion Sort, to avoid deep recursion. Additionally, multi-pivot Quick Sort can be employed, though it may be more challenging to implement.
+*Optimizations: We can use Tukey's ninther for better pivot selection, combining it with insertion sort to handle small subarrays efficiently, employing Hoare’s partition scheme for improved partitioning, and using three-way partitioning to efficiently handle arrays with many duplicate keys.
 
 ------------Radix Sort------------
 *Introduction:
@@ -80,19 +87,19 @@ step 4: Repeat steps 1-3 with 2 subarrays on the left/right of the pivot.
 *Optimizations:
 
 ------------Shell sort------------
-*Introduction: Instead of taking many small steps like Insertion Sort, Shell Sort will pass the element further which means faster.
-*Algorithm Steps[4]: Records R1,..., RN are rearranged in place; after sorting is complete, their keys will be in order, K1 ≤ · · · ≤ KN. An auxiliary sequence of increments ht−1, ht−2, . . ., h0 is used to control the sorting process, where h0 = 1;
+*Introduction: An algorithm bases on Insertion Sort; proceeds left to right through a file, inserting each element into position among the elements to its left (which are in sorted order) by moving the larger ones one position to the right[5].
+*Algorithm Steps[4]: Records R_1,..., R_N are rearranged in place; after sorting is complete, their keys will be in order, K_1 ≤ · · · ≤ K_N. An auxiliary sequence of increments h_t−1, h_t−2, . . ., h0 is used to control the sorting process, where h_0 = 1;
 step 1: [Loop on s.] Perform step 2 for s = t − 1, t − 2, . . ., 0; then terminate the algorithm.
-step 2: [Loop on j.] Set h ← hs, and perform steps 3 through 6 for h < j ≤ N.
-step 3: [Set up i, K, R.] Set i ← j − h, K ← Kj, R ← Rj.
-step 4: [Compare K : Ki.] If K ≥ Ki, go to step 6.
-step 5: [Move Ri, decrease i.] Set Ri+h ← Ri, then i ← i − h. If i > 0, go back to step 4.
-step 6: [R into Ri+h.] Set Ri+h ← R
-*Complexity Analysis:
+step 2: [Loop on j.] Set h ← h_s, and perform steps 3 through 6 for h < j ≤ N.
+step 3: [Set up i, K, R.] Set i ← j − h, K ← K_j, R ← R_j.
+step 4: [Compare K : Ki.] If K ≥ K_i, go to step 6.
+step 5: [Move Ri, decrease i.] Set R_i+h ← R_i, then i ← i − h. If i > 0, go back to step 4.
+step 6: [R into Ri+h.] Set R_i+h ← R
+*Complexity Analysis: The complexity depends on the sequence h_t−1, h_t−2, . . ., h_0 above, with the Shell's original sequence: n/2, n/4, . . ., 1; the complexity would be:
     Best-case time complexity: O(nlog(n)) - when the array is already sorted
     Average-case time complexity: O(nlog(n))
     Worst-case time complexity: O(n^2)
-*Optimizations: 
+*Optimizations: The best-known sequence of increments for the Shell sort algorithm is Marcin Ciura's gap sequence[6], detailed in Marcin Ciura's work on "Best Increments for the Average Case of Shellsort" (Fundamentals of Computation Theory: 13th International Symposium, FCT 2001).
 
 ------------Counting Sort------------
 *Introduction:
@@ -112,4 +119,5 @@ References:
 [2]: Paul E. Black, "insertion sort", in Dictionary of Algorithms and Data Structures [online], Paul E. Black, ed. 6 April 2023,https://www.nist.gov/dads/HTML/insertionSort.html. Accessed 26 June 2024.
 [3]: Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (2022). Introduction to algorithms (4th ed.). MIT Press.
 [4]: Knuth, D.E., 1998. The Art of Computer Programming. 2nd ed. Vol. 3. Reading, MA: Addison-Wesley, pp. 84.
-[5]:
+[5]: Diaz, J. and Serna, M. (eds), 1996. Algorithms - ESA 1996 - 4th Annual European Symposium, Proceedings. Barcelona, Spain: Springer Verlag, pp. 1.
+[6]: Wikipedia contributors, n.d. Shellsort. Wikipedia, The Free Encyclopedia,https://en.wikipedia.org/wiki/Shellsort. Accessed: 28 June 2024.
