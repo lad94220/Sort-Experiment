@@ -230,49 +230,103 @@ void countingSort(int* src, int n) {
 
 
 //flash sort
-void flashSort(int* src, int n) {
-	int mx = *src, mn = *src;
-	for (int* run = src; run < src + n; run++) {
-		if (*run > mx) mx = *run;
-		if (*run < mn) mn = *run;
-	}
+// void flashSort(int* src, int n) {
+// 	int mx = *src, mn = *src;
+// 	for (int* run = src; run < src + n; run++) {
+// 		if (*run > mx) mx = *run;
+// 		if (*run < mn) mn = *run;
+// 	}
 
-	if (mx == mn) return;
+// 	if (mx == mn) return;
 
-	int bucketNum = (int)(0.45 * n);
-#define getK(x) (int)(bucketNum - 1) * (x - mn) / (mx - mn)
+// 	int bucketNum = (int)(0.45 * n);
+// #define getK(x) (int)(bucketNum - 1) * (x - mn) / (mx - mn)
 
-	int* pos = new int[bucketNum]();
+// 	int* pos = new int[bucketNum]();
 
-	for (int i = 0; i < n; i++)
-		pos[getK(src[i])]++;
-	for (int i = 1; i < bucketNum; i++)
-		pos[i] += pos[i - 1];
+// 	for (int i = 0; i < n; i++)
+// 		pos[getK(src[i])]++;
+// 	for (int i = 1; i < bucketNum; i++)
+// 		pos[i] += pos[i - 1];
 
-	int count = 0;
-	int i = 0;
-	while (count < n) {
-		int k = getK(src[i]);
-		while (i >= pos[k])
-			k = getK(src[++i]);
-		int tmp = src[i];
-		while (i != pos[k]) {
-			k = getK(tmp);
-			swap(tmp, src[--pos[k]]);
-			count++;
-		}
-	}
+// 	int count = 0;
+// 	int i = 0;
+// 	while (count < n) {
+// 		int k = getK(src[i]);
+// 		while (i >= pos[k])
+// 			k = getK(src[++i]);
+// 		int tmp = src[i];
+// 		while (i != pos[k]) {
+// 			k = getK(tmp);
+// 			swap(tmp, src[--pos[k]]);
+// 			count++;
+// 		}
+// 	}
 
-	for (int k = 1; k < bucketNum; ++k) {
-		for (int i = pos[k] - 2; i >= pos[k - 1]; --i)
-			if (src[i] > src[i + 1]) {
-				int t = src[i], j = i;
-				while (t > src[j + 1]) { src[j] = src[j + 1]; ++j; }
-				src[j] = t;
-			}
-	}
+// 	for (int k = 1; k < bucketNum; ++k) {
+// 		for (int i = pos[k] - 2; i >= pos[k - 1]; --i)
+// 			if (src[i] > src[i + 1]) {
+// 				int t = src[i], j = i;
+// 				while (t > src[j + 1]) { src[j] = src[j + 1]; ++j; }
+// 				src[j] = t;
+// 			}
+// 	}
 
-	delete[]pos;
+// 	delete[]pos;
+// }
+
+
+//code gpt
+void flashSort(int* arr, int n) {
+    if (n <= 1) return;
+
+    // Step 1: Find minimum and maximum values in the array
+    int min_val = arr[0];
+    int max_val = arr[0];
+
+    for (int i = 1; i < n; ++i) {
+        if (arr[i] < min_val) {
+            min_val = arr[i];
+        } else if (arr[i] > max_val) {
+            max_val = arr[i];
+        }
+    }
+
+    // Determine the number of buckets
+    int k = n / 2; // Can be adjusted based on empirical data or analysis
+
+    // Step 2: Initialize and fill the buckets
+    int* bucket = new int[k](); // k buckets, initialized to 0
+    int* count = new int[k]();  // count array for buckets, initialized to 0
+
+    double interval = (double)(max_val - min_val) / k;
+
+    for (int i = 0; i < n; ++i) {
+        int index = (arr[i] - min_val) / interval;
+        bucket[index]++;
+    }
+
+    // Step 3: Sort individual buckets and find the number of elements in each bucket
+    int start = 0;
+    for (int i = 0; i < k; ++i) {
+        int temp = bucket[i];
+        bucket[i] = start;
+        start += temp;
+    }
+
+    // Step 4: Rearrange the elements in each bucket directly into the original array
+    int* copy = new int[n];
+    for (int i = 0; i < n; ++i) {
+        int index = (arr[i] - min_val) / interval;
+        copy[i] = arr[i];
+        arr[bucket[index]] = copy[i];
+        bucket[index]++;
+    }
+
+    // Clean up allocated memory
+    delete[] bucket;
+    delete[] count;
+    delete[] copy;
 }
 
 //subroutines for counting/flash sort

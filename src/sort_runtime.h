@@ -1,5 +1,6 @@
 #include <iostream>
 #include <algorithm>
+#include <time.h>
 using namespace std;
 
 //selection sort
