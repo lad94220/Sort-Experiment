@@ -115,16 +115,16 @@ step 6: The frequency of number in A[j] (which is stored in C[A[j]]) is position
 ------------Flash Sort------------
 *Introduction: Flash Sort consists of three logical blocks: classification, permutation, and straight insertion. Classification determines the size of each class of elements. Permutation does long-range reordering to collect elements of each class together, and straight insertion does the final short-range ordering[7].
 *Algorithm Steps:
-step 1: [Start of classification] Find the value of smallest element and the index of the largest element, if the largest and the smallest numbers are equal, all the elements are identical. Hence, the array is sorted.
-step 2: Create an array L to store the number of elements in each "bucket" (the number of bucket is usually determined by m = 0.45 * n with n being the number of elements in the input array) initialize the a array with 0
-step 3: Determine the bucket of each element (by the formula: floor( ((m - 1.0)/(a[nmax]-min)) * (a[i] - min) ); with nmax: the largest number's index; min: the smallest number's value; i: running number to go through the whole array a; function floor is to get the largest natural number smaller than the number inside), count and store them in array L
-step 4: [End of classification] Convert the number of elements in each bucket into the accumulative sum in the array L
-step 5: [Permutation] Swapping to put elements into its target bucket
-step 6: [Straight insertion] Use Insertion Sort to sort elements in each bucket 
+step 1: [Start of classification] Find the value of smallest element and the index of the largest element. If the largest and the smallest numbers are equal, all elements are identical, and the array is already sorted.
+step 2: Create an array L to store the number of elements in each "bucket" (the number of buckets is usually determined by m = 0.45 * n with n being the number of elements in the input array). Initialize the array with 0.
+step 3: Determine the bucket of each element (by the formula: floor( ((m - 1.0)/(a[nmax]-min)) * (a[i] - min) ); with nmax: the largest number's index; min: the smallest number's value; i: running number to go through the whole array a; function floor is to get the largest natural number smaller than the number inside), count and store these in array L
+step 4: [End of classification] Convert the number of elements in each bucket into the cumulative sum in array L
+step 5: [Permutation] Swap elements to place them into their target buckets.
+step 6: [Straight insertion] Use Insertion Sort to sort elements within each bucket 
 *Complexity Analysis:
     Average-case time complexity: O(n) - when the array has a known distribution.
-    Worst-case time complexity: O(n^2) - when the distribution of the elements in the input array is highly non-uniform, which can lead to bad bucket distributions.
-*Optimizations: We can use resursion in "Straight insertion" block to continue sorting elements in a bucket if the number of elements in a bucket is not small the enough to hide the ineffient of Insertion Sort.
+    Worst-case time complexity: O(n^2) - when the distribution of the elements in the input array is highly non-uniform, leading to poor bucket distributions.
+*Optimizations: We can use resursion in "Straight insertion" block to continue sorting elements in a bucket if the number of elements in a bucket is not small enough to hide the inefficiency of Insertion Sort.
 
 
 References:
