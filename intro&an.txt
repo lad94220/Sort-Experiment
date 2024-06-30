@@ -110,13 +110,21 @@ step 3: Count the frequency of each distinct number x in the input array, put th
 step 4: Sum up those frequencies of numbers smaller than m and frequency of m and put it into C[x]
 step 5: [Loop on j.] Perform step 6 for j = n, n - 1, . . ., 1; then B is the output sorted array
 step 6: The frequency of number in A[j] (which is stored in C[A[j]]) is position of A[j] in the output array B, minus that frequency by 1.
-*Complexity Analysis: With k being the largest number in the input array; because it always go through loop on n twice and loop on k twice, the complexity will always be O(n+k)
+*Complexity Analysis: With k being the largest number in the input array; because the algorithm always go through loop on n twice and loop on k twice, the time complexity will always be O(n+k)
 
 ------------Flash Sort------------
-*Introduction:
+*Introduction: Flash Sort consists of three logical blocks: classification, permutation, and straight insertion. Classification determines the size of each class of elements. Permutation does long-range reordering to collect elements of each class together, and straight insertion does the final short-range ordering[7].
 *Algorithm Steps:
+step 1: [Start of classification] Find the value of smallest element and the index of the largest element, if the largest and the smallest numbers are equal, all the elements are identical. Hence, the array is sorted.
+step 2: Create an array L to store the number of elements in each "bucket" (the number of bucket is usually determined by m = 0.45 * n with n being the number of elements in the input array) initialize the a array with 0
+step 3: Determine the bucket of each element (by the formula: floor( ((m - 1.0)/(a[nmax]-min)) * (a[i] - min) ); with nmax: the largest number's index; min: the smallest number's value; i: running number to go through the whole array a; function floor is to get the largest natural number smaller than the number inside), count and store them in array L
+step 4: [End of classification] Convert the number of elements in each bucket into the accumulative sum in the array L
+step 5: [Permutation] Swapping to put elements into its target bucket
+step 6: [Straight insertion] Use Insertion Sort to sort elements in each bucket 
 *Complexity Analysis:
-*Optimizations:
+    Average-case time complexity: O(n) - when the array has a known distribution.
+    Worst-case time complexity: O(n^2) - when the distribution of the elements in the input array is highly non-uniform, which can lead to bad bucket distributions.
+*Optimizations: We can use resursion in "Straight insertion" block to continue sorting elements in a bucket if the number of elements in a bucket is not small the enough to hide the ineffient of Insertion Sort.
 
 
 References:
@@ -126,3 +134,4 @@ References:
 [4]: Knuth, D.E., 1998. The Art of Computer Programming. 2nd ed. Vol. 3. Reading, MA: Addison-Wesley, pp. 84.
 [5]: Diaz, J. and Serna, M. (eds), 1996. Algorithms - ESA 1996 - 4th Annual European Symposium, Proceedings. Barcelona, Spain: Springer Verlag, pp. 1.
 [6]: Wikipedia contributors, n.d. Shellsort. Wikipedia, The Free Encyclopedia,https://en.wikipedia.org/wiki/Shellsort. Accessed: 28 June 2024.
+[7]: Neubert, K.-D., 1998. The Flashsort1 Algorithm. Dr. Dobb's Journal, February,https://www.neubert.net/FSOIntro.html. Accessed 30 June 2024.
