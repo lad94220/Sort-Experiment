@@ -43,94 +43,94 @@ void writeFile(char* file_name, int* array, int n) {
     fclose(f);
 }
 
-size_t count_comparisons(int* array, int n, string algro) {
+size_t count_comparisons(int* array, int n, string algo) {
     size_t count_compare = 0;
-    if (algro == "selection-sort") selectionSort_count(array, n, count_compare);
-    if (algro == "insertion-sort") insertionSort_count(array, n, count_compare);
-    if (algro == "bubble-sort") bubbleSort_count(array, n, count_compare);
-    if (algro == "heap-sort") heapSort_count(array, n, count_compare);
-    if (algro == "merge-sort") mergeSort_count(array, n, count_compare);
-    if (algro == "quick-sort") quickSort_count(array, n, count_compare);
-    if (algro == "radix-sort") radixSort_count(array, n, count_compare);
-    if (algro == "shaker-sort") shakerSort_count(array, n, count_compare);
-    if (algro == "shell-sort") shellSort_count(array, n, count_compare);
-    if (algro == "counting-sort") countingSort_count(array, n, count_compare);
-    if (algro == "flash-sort") flashSort_count(array, n, count_compare);
+    if (algo == "selection-sort") selectionSort_count(array, n, count_compare);
+    if (algo == "insertion-sort") insertionSort_count(array, n, count_compare);
+    if (algo == "bubble-sort") bubbleSort_count(array, n, count_compare);
+    if (algo == "heap-sort") heapSort_count(array, n, count_compare);
+    if (algo == "merge-sort") mergeSort_count(array, n, count_compare);
+    if (algo == "quick-sort") quickSort_count(array, n, count_compare);
+    if (algo == "radix-sort") radixSort_count(array, n, count_compare);
+    if (algo == "shaker-sort") shakerSort_count(array, n, count_compare);
+    if (algo == "shell-sort") shellSort_count(array, n, count_compare);
+    if (algo == "counting-sort") countingSort_count(array, n, count_compare);
+    if (algo == "flash-sort") flashSort_count(array, n, count_compare);
     return count_compare;
 }
 
-double runtime(int* array, int n, string algro) {
-    if (algro == "selection-sort") {
+double runtime(int* array, int n, string algo) {
+    if (algo == "selection-sort") {
         auto start = std::chrono::high_resolution_clock::now();
         selectionSort(array, n);
         auto end = std::chrono::high_resolution_clock::now();
         double duration = duration_cast<milliseconds>(end - start).count();
         return duration;
     }
-    if (algro == "insertion-sort") {
+    if (algo == "insertion-sort") {
         auto start = std::chrono::high_resolution_clock::now();
         insertionSort(array, n);
         auto end = std::chrono::high_resolution_clock::now();
         double duration = duration_cast<milliseconds>(end - start).count();
         return duration;
     }
-    if (algro == "bubble-sort") {
+    if (algo == "bubble-sort") {
         auto start = std::chrono::high_resolution_clock::now();
         bubbleSort(array, n);
         auto end = std::chrono::high_resolution_clock::now();
         double duration = duration_cast<milliseconds>(end - start).count();
         return duration;
         }
-    if (algro == "heap-sort") {
+    if (algo == "heap-sort") {
         auto start = std::chrono::high_resolution_clock::now();
         heapSort(array, n);
         auto end = std::chrono::high_resolution_clock::now();
         double duration = duration_cast<milliseconds>(end - start).count();
         return duration;
         }
-    if (algro == "merge-sort") {
+    if (algo == "merge-sort") {
         auto start = std::chrono::high_resolution_clock::now();
         mergeSort(array, n);
         auto end = std::chrono::high_resolution_clock::now();
         double duration = duration_cast<milliseconds>(end - start).count();
         return duration;
     }
-    if (algro == "quick-sort") {
+    if (algo == "quick-sort") {
         auto start = std::chrono::high_resolution_clock::now();
         quickSort(array, n);
         auto end = std::chrono::high_resolution_clock::now();
         double duration = duration_cast<milliseconds>(end - start).count();
         return duration;
     }
-    if (algro == "radix-sort") {
+    if (algo == "radix-sort") {
         auto start = std::chrono::high_resolution_clock::now();
         radixSort(array, n);
         auto end = std::chrono::high_resolution_clock::now();
         double duration = duration_cast<milliseconds>(end - start).count();
         return duration;
     }
-    if (algro == "shaker-sort") {
+    if (algo == "shaker-sort") {
         auto start = std::chrono::high_resolution_clock::now();
         shakerSort(array, n);
         auto end = std::chrono::high_resolution_clock::now();
         double duration = duration_cast<milliseconds>(end - start).count();
         return duration;
     }
-    if (algro == "shell-sort") {
+    if (algo == "shell-sort") {
         auto start = std::chrono::high_resolution_clock::now();
         shellSort(array, n);
         auto end = std::chrono::high_resolution_clock::now();
         double duration = duration_cast<milliseconds>(end - start).count();
         return duration;
     }
-    if (algro == "counting-sort") {
+    if (algo == "counting-sort") {
         auto start = std::chrono::high_resolution_clock::now();
         countingSort(array, n);
         auto end = std::chrono::high_resolution_clock::now();
         double duration = duration_cast<milliseconds>(end - start).count();
         return duration;
     }
-    if (algro == "flash-sort"); {
+    if (algo == "flash-sort"); {
         auto start = std::chrono::high_resolution_clock::now();
         flashSort(array, n);
         auto end = std::chrono::high_resolution_clock::now();
