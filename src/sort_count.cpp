@@ -1,4 +1,5 @@
 #include "sort_count.h"
+#include "sort_runtime.h"
 
 // selection sort
 void selectionSort_count(int* src, int n, size_t& count_compare) {
@@ -216,16 +217,16 @@ void countingSort_count(int* src, int n, size_t& count_compare) {
 
 void flashSort_count(int* src, int n, size_t& count_compare) {
 	int Mn = *src;
-	int mxInd = 0;
+	int Mx = *src;
 	for (int* run = src; ++count_compare && run < src + n; run++) {
 		if (++count_compare && *run < Mn) Mn = *run;
-		if (++count_compare && *run > *(src + mxInd)) mxInd = run - src;
+		if (++count_compare && *run > Mx) Mx = *run;
 	}
-	if (++count_compare && *(src + mxInd) == Mn) return;
+	if (++count_compare && Mx == Mn) return;
 
 	int bucketNum = int(0.45 * n);
 
-	int c = (int)(bucketNum - 1) / (*(src + mxInd) - Mn);
+	int c = (int)(bucketNum - 1) / (Mx - Mn);
 
 	int* pos = new int[bucketNum]();
 	for (int i = 0; ++count_compare && i < n; i++)
@@ -233,27 +234,17 @@ void flashSort_count(int* src, int n, size_t& count_compare) {
 	for (int i = 1; ++count_compare && i < bucketNum; i++)
 		pos[i] += pos[i - 1];
 
-	swap(src[mxInd], src[0]);
-	int nmove = 0;
-	int j = 0;
-	int k = bucketNum - 1;
-	int t = 0;
-	while (++count_compare && nmove < n - 1)
-	{
-		while (++count_compare && j > pos[k] - 1)
-		{
-			j++;
-			k = c * (src[j] - Mn);
-		}
-		int tmp = src[j];
-		if (++count_compare && k < 0) break;
-		while (++count_compare && j != pos[k])
-		{
+	int count = 0;
+	int i = 0;
+	while (++count_compare && count < n) {
+		int k = c * (src[i] - Mn);
+		while (++count_compare && i >= pos[k])
+			k = c * (src[++i] - Mn);
+		int tmp = src[i];
+		while (++count_compare && i != pos[k]) {
 			k = c * (tmp - Mn);
-			int hold = src[t = --pos[k]];
-			src[t] = tmp;
-			tmp = hold;
-			++nmove;
+			swap(tmp, src[--pos[k]]);
+			++count;
 		}
 	}
 
