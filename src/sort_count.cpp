@@ -258,7 +258,7 @@ void flashSort_count(int* src, int n, size_t& count_compare) {
 	}
 
 	delete[]pos;
-	insertionSort(src, n);
+	insertionSort_count(src, n, count_compare);
 }
 
 //subroutines for counting/flash sort
