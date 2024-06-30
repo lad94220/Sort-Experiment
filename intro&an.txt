@@ -124,7 +124,7 @@ step 6: [Straight insertion] Use Insertion Sort to sort elements within each buc
 *Complexity Analysis:
     Average-case time complexity: O(n) - when the array has a known distribution.
     Worst-case time complexity: O(n^2) - when the distribution of the elements in the input array is highly non-uniform, leading to poor bucket distributions.
-*Optimizations: We can use resursion in "Straight insertion" block to continue sorting elements in a bucket if the number of elements in a bucket is not small enough to hide the inefficiency of Insertion Sort.
+*Optimizations: We can use recursion in "Straight insertion" block to continue sorting elements in a bucket if the number of elements in a bucket is not small enough to hide the inefficiency of Insertion Sort.
 
 
 References:
