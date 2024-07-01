@@ -229,43 +229,45 @@ void countingSort(int* src, int n) {
 }
 
 void flashSort(int* src, int n) {
-	int Mn = *src;
-	int Mx = *src;
-	for (int* run = src; run < src + n; run++) {
-		if (*run < Mn) Mn = *run;
-		if (*run > Mx) Mx = *run;
-	}
-	if (Mx == Mn) return;
+    if (n <= 1) return;
 
-	int bucketNum = int(0.45 * n);
+    int Mn = src[0];
+    int Mx = src[0];
+    for (int i = 1; i < n; ++i) {
+        if (src[i] < Mn) Mn = src[i];
+        if (src[i] > Mx) Mx = src[i];
+    }
+    if (Mx == Mn) return;
 
-	int c = (int)(bucketNum - 1) / (Mx - Mn);
+    int bucketNum = static_cast<int>(0.45 * n);
+    int* pos = new int[bucketNum]();
+    double c = static_cast<double>(bucketNum - 1) / (Mx - Mn);
 
-	int* pos = new int[bucketNum]();
-	for (int i = 0; i < n; i++)
-		pos[c * (src[i] - Mn)]++;
-	for (int i = 1; i < bucketNum; i++)
-		pos[i] += pos[i - 1];
+    for (int i = 0; i < n; ++i)
+        pos[static_cast<int>(c * (src[i] - Mn))]++;
+    for (int i = 1; i < bucketNum; ++i)
+        pos[i] += pos[i - 1];
 
-	int count = 0;
-	int i = 0;
-	while (count < n) {
-		int k = c * (src[i] - Mn);
-		while (i >= pos[k])
-			k = c * (src[++i] - Mn);
-		int tmp = src[i];
-		while (i != pos[k]) {
-			k = c * (tmp - Mn);
-			swap(tmp, src[--pos[k]]);
-			++count;
-		}
-	}
+    int count = 0;
+    int i = 0;
+    while (count < n) {
+        int k = static_cast<int>(c * (src[i] - Mn));
+        while (i >= pos[k])
+            k = static_cast<int>(c * (src[++i] - Mn));
+        int tmp = src[i];
+        while (i != pos[k]) {
+            k = static_cast<int>(c * (tmp - Mn));
+            std::swap(tmp, src[--pos[k]]);
+            ++count;
+        }
+    }
 
-	delete[]pos;
-	insertionSort(src, n);
+    delete[] pos;
+    insertionSort(src, n);
 }
 
-//subroutines for counting/flash sort
+
+//subroutines for counting sort
 int maxVal(int* start, int* end) {
 	int mx = *start;
 	for (int* run = start; run < end; run++)
