@@ -14,12 +14,12 @@ void selectionSort_count(int* src, int n, size_t& count_compare) {
 
 // insertion sort
 void insertionSort_count(int* src, int n, size_t& count_compare) {
-	for (int i = 1; ++count_compare && i < n; ++i) {
+	for (int i = 1; ++count_compare && i < n; i++) {
 		int key = src[i];
 		int j = i - 1;
-		while (++count_compare && j > 0 && ++count_compare && src[j] > key) {
+		while (++count_compare && j >= 0 && ++count_compare && src[j] > key) {
 			src[j + 1] = src[j];
-			--j;
+			j--;
 		}
 		src[j + 1] = key;
 	}

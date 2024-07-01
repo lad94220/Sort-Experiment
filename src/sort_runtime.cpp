@@ -15,12 +15,12 @@ void selectionSort(int* src, int n) {
 
 // insertion sort
 void insertionSort(int* src, int n) {
-	for (int i = 1; i < n; ++i) {
+	for (int i = 1; i < n; i++) {
 		int key = src[i];
 		int j = i - 1;
-		while (j > 0 && src[j] > key) {
+		while (j >= 0 && src[j] > key) {
 			src[j + 1] = src[j];
-			--j;
+			j--;
 		}
 		src[j + 1] = key;
 	}
